@@ -4,20 +4,10 @@ import sys
 # ==========================================================
 # Linux: Force NVIDIA GPU (Optimus / PRIME systems)
 # ==========================================================
-if sys.platform.startswith("linux"):
-    os.environ["__NV_PRIME_RENDER_OFFLOAD"] = "1"
-    os.environ["__GLX_VENDOR_LIBRARY_NAME"] = "nvidia"
+# if sys.platform.startswith("linux"):
+#     os.environ["__NV_PRIME_RENDER_OFFLOAD"] = "1"
+#     os.environ["__GLX_VENDOR_LIBRARY_NAME"] = "nvidia"
 
-# ==========================================================
-# Windows: (only if running on Windows)
-# ==========================================================
-elif sys.platform.startswith("win"):
-    import ctypes
-    ctypes.windll.kernel32.SetDllDirectoryW(None)
-    try:
-        ctypes.windll.nvapi64
-    except:
-        pass
 import glfw
 import numpy as np
 from OpenGL.GL import *
@@ -212,7 +202,9 @@ def show_moving_gabor_240hz(
     #                             monitor, None)
     # glfw.make_context_current(window)
     # glfw.swap_interval(1)
-    window = glfw.create_window(width, height, "240Hz Moving Gabor",
+    # 创建普通窗口
+    window = glfw.create_window(width, height,
+                                "240Hz Moving Gabor",
                                 monitor, None)
     glfw.make_context_current(window)
     print("GL_VENDOR  :", glGetString(GL_VENDOR).decode())
@@ -401,16 +393,16 @@ import argparse
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--contrast", type=float, default=0.92)
+    parser.add_argument("--contrast", type=float, default=0.15)
     parser.add_argument("--spatial_freq_cpp", type=float, default=0.1)
-    parser.add_argument("--speed_px_per_sec", type=float, default=600.0)
+    parser.add_argument("--speed_px_per_sec", type=float, default=400.0)
     parser.add_argument("--visual_radius_deg", type=float, default=5.0)
     parser.add_argument("--mean_luminance", type=float, default=100.0)
     parser.add_argument("--peak_luminance", type=float, default=400.0)
     parser.add_argument("--diagonal_inch", type=float, default=27)
     parser.add_argument("--viewing_distance", type=float, default=1.0)
     parser.add_argument("--monitor_index", type=int, default=1)
-    parser.add_argument("--color_direction", type=str, default="ach") # 'ach' [C: 0-1] | 'rg' [C: 0-0.15] | 'yv' [C: 0-0.92]
+    parser.add_argument("--color_direction", type=str, default="rg") # 'ach' [C: 0-1] | 'rg' [C: 0-0.15] | 'yv' [C: 0-0.92]
 
     args = parser.parse_args()
 

@@ -24,7 +24,7 @@ def main():
     )
     parser.add_argument(
         "--output", type=str,
-        default=r"Color_measure_specbos/Color_measure_Sony_a7R3_FE90_F20_Eizo_specbos_2025_5_5_filter.json",
+        default=r"Measure_specbos/Color_measure_Sony_a7R3_FE90_F20_Eizo_specbos_2025_5_5_filter.json",
         help="Path to save JSON results"
     )
     args = parser.parse_args()
