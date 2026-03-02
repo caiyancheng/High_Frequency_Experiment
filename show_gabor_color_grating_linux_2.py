@@ -303,15 +303,15 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--contrast", type=float, default=1)
-    parser.add_argument("--spatial_freq_cpp", type=float, default=0.2)
-    parser.add_argument("--speed_px_per_sec", type=float, default=200.0)
+    parser.add_argument("--contrast", type=float, default=0.92)
+    parser.add_argument("--spatial_freq_cpp", type=float, default=0.1)
+    parser.add_argument("--speed_px_per_sec", type=float, default=120.0)
     parser.add_argument("--visual_radius_deg", type=float, default=2.0)
     parser.add_argument("--mean_luminance", type=float, default=50.0)
     parser.add_argument("--diagonal_inch", type=float, default=27)
-    parser.add_argument("--viewing_distance", type=float, default=1.0)
+    parser.add_argument("--viewing_distance", type=float, default=0.5)
     parser.add_argument("--monitor_index", type=int, default=1)
-    parser.add_argument("--color_direction", type=str, default="ach") # 'ach' [C: 0-1] | 'rg' [C: 0-0.15] | 'yv' [C: 0-0.92]
+    parser.add_argument("--color_direction", type=str, default="yv") # 'ach' [C: 0-1] | 'rg' [C: 0-0.15] | 'yv' [C: 0-0.92]
 
     args = parser.parse_args()
 
