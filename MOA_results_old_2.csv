@@ -1,0 +1,8 @@
+name,color,speed_px_per_sec,contrast,mean_luminance,spatial_frequency_cpp,diagonal_inch,visual_radius_deg,resolution_x,resolution_y,refresh_rate,repeat_index,distance_m,retinal_spatial_frequency_cpd,temporal_frequency_hz,theta_deg,gabor_radius_px
+YanchengCai,rg,150,0.14,10,0.2,27,2.0,2560,1440,240,0,0.91,14.0804,30.0,36.3625,136.1
+YanchengCai,rg,100,0.14,50,0.2,27,2.0,2560,1440,240,0,1.8556,27.9791,20.0,18.2993,277.52
+YanchengCai,yv,400,0.92,10,0.05,27,2.0,2560,1440,240,0,2.1,7.9015,20.0,16.1994,314.08
+YanchengCai,yv,600,0.92,10,0.05,27,2.0,2560,1440,240,0,0.8594,3.3377,30.0,38.3501,128.54
+YanchengCai,rg,225,0.14,10,0.2,27,2.0,2560,1440,240,0,1.3295,20.2069,45.0,25.3379,198.85
+YanchengCai,ach,80,0.5,10,0.25,27,2.0,2560,1440,240,0,1.213,23.1198,20.0,27.6818,181.42
+YanchengCai,ach,180,0.5,50,0.25,27,2.0,2560,1440,240,0,1.3186,25.0574,45.0,25.5413,197.21

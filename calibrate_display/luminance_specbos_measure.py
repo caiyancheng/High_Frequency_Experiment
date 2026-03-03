@@ -82,7 +82,7 @@ def create_second_monitor_window():
     glfw.swap_interval(1)
     glViewport(0, 0, width, height)
 
-    return window
+    return window, width, height
 
 
 # ==========================================================
@@ -93,9 +93,9 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=str,
-                        default="Measure_specbos/luminance_pixel_measure.json")
+                        default="Measure_specbos/luminance_pixel_measure_B100_C100_s800.json")
     parser.add_argument("--points", type=int, default=20)
-    parser.add_argument("--repeat", type=int, default=5)
+    parser.add_argument("--repeat", type=int, default=3)
 
     args = parser.parse_args()
 
@@ -104,7 +104,7 @@ def main():
 
     pixel_list = generate_pixel_values(args.points, include_black=True, scale="linear")
 
-    window = create_second_monitor_window()
+    window, screen_w, screen_h = create_second_monitor_window()
 
     results = {}
 
@@ -115,8 +115,25 @@ def main():
 
             print(f"\nDisplaying pixel value: {pixel}")
 
+            # 1️⃣ 先清全屏为黑
+            glClearColor(0.0, 0.0, 0.0, 1.0)
+            glClear(GL_COLOR_BUFFER_BIT)
+
+            # 2️⃣ 计算中心 800x800 区域
+            square_size = 800
+
+            x0 = int((screen_w - square_size) / 2)
+            y0 = int((screen_h - square_size) / 2)
+
+            # 3️⃣ 用 scissor 限定绘制区域
+            glEnable(GL_SCISSOR_TEST)
+            glScissor(x0, y0, square_size, square_size)
+
+            # 4️⃣ 在该区域填充灰色
             glClearColor(normalized, normalized, normalized, 1.0)
             glClear(GL_COLOR_BUFFER_BIT)
+
+            glDisable(GL_SCISSOR_TEST)
             glfw.swap_buffers(window)
             glfw.poll_events()
 
