@@ -24,13 +24,13 @@ DIAGONAL_INCH         = 27.0
 VISUAL_RADIUS_DEG     = 2.0
 MONITOR_INDEX         = 1       # change to 0 if you only have one display
 
-COLOR_DIRECTION       = "ach"
-MEAN_LUMINANCE        = 50.0
-CONTRAST              = 0.5
+COLOR_DIRECTION       = "rg"
+MEAN_LUMINANCE        = 50
+CONTRAST              = 0.14
 
-SPATIAL_FREQ_CPP      = 0.25
+SPATIAL_FREQ_CPP      = 0.2
 # SPEED_PX_PER_SEC      = 180.0
-SPEED_PX_PER_SEC      = 80.0
+SPEED_PX_PER_SEC      = 50.0
 DISTANCE_M            = 1 #2.1
 STIMULUS_DURATION_SEC = 100.0     # how long to show the Gabor
 # ──────────────────────────────────────────────────────────────────────────────

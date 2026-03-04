@@ -158,9 +158,9 @@ def main():
     parser.add_argument("--name",                      default="YanchengCai")
     # parser.add_argument("--name", default="Rafal Mantiuk")
     parser.add_argument("--colors",      nargs="+",    default=["ach", "rg", "yv"])
-    parser.add_argument("--ach_speeds", nargs="+", type=float, default=[80, 120, 180])
-    parser.add_argument("--rg_speeds", nargs="+", type=float, default=[100, 150, 225])
-    parser.add_argument("--yv_speeds", nargs="+", type=float, default=[400, 600, 900])
+    parser.add_argument("--ach_speeds", nargs="+", type=float, default=[40, 80, 120, 180])
+    parser.add_argument("--rg_speeds", nargs="+", type=float, default=[50, 100, 150, 225])
+    parser.add_argument("--yv_speeds", nargs="+", type=float, default=[200, 400, 600])
     parser.add_argument("--ach_luminance_list", nargs="+", type=float, default=[5, 50])
     parser.add_argument("--rg_luminance_list", nargs="+", type=float, default=[5, 50])
     parser.add_argument("--yv_luminance_list", nargs="+", type=float, default=[5, 50])
@@ -177,12 +177,20 @@ def main():
     parser.add_argument("--monitor_index",             type=int,   default=1)
     args = parser.parse_args()
 
+    SKIP_CONDITIONS = {
+        ("yv", 600, 5),  # (color, speed, lum)
+        ("yv", 200, 50),
+        ("rg", 225, 5),  # 以后想跳过的其他条件也加在这里
+    }
     # ---------- 条件列表 ----------
     conditions = []
     for color in args.colors:
         contrast = getattr(args, f"{color}_contrast")
         for speed in getattr(args, f"{color}_speeds"):
             for lum in getattr(args, f"{color}_luminance_list"):
+                if (color, speed, lum) in SKIP_CONDITIONS:
+                    print(f"  [手动跳过] {color} speed={speed} lum={lum}")
+                    continue
                 for rep in range(args.repeats):
                     conditions.append(dict(
                         color=color, speed=speed,
@@ -237,6 +245,7 @@ def main():
             if cond_key in completed:
                 print(f"  [跳过] 条件 {cond_idx+1}/{total}  {color} {speed}px/s lum={lum} rep={rep}")
                 continue
+
 
             # 随机起点消除锚定偏差
             current_dist       = float(np.random.uniform(MIN_DIST, MAX_DIST))

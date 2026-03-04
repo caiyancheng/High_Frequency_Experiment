@@ -1,8 +1,14 @@
 """
 Quest 2AFC Experiment — main logic
 ===================================
-Imports ExperimentRenderer from gabor_renderer; contains only
-Quest staircase, platform control, CSV I/O, and the trial loop.
+Quest operates in cpd_inv space:
+    cpd     = ppd_at_dist * sf_cpp          (actual spatial frequency in cpd)
+    cpd_inv = -(cpd ^ (1/3))               (cube-root compressed, sign-flipped)
+
+Inverses:
+    cpd     = (-cpd_inv) ^ 3
+    ppd     = cpd / sf_cpp
+    dist    = screen_width_m / (2 * tan(radians(screen_width_px / (2*ppd))))
 """
 
 import argparse
@@ -30,8 +36,51 @@ UNIT_PER_M            = 100 / 1.6
 MIN_DIST, MAX_DIST    = 0.5, 2.1
 MOA_CSV               = "MOA_results.csv"
 QUEST_CSV             = "Quest_results.csv"
-TRIALS_PER_CONDITION  = 20
-QUEST_CONVERGE_THRESH = 0.005   # metres
+TRIALS_PER_CONDITION  = 30
+QUEST_CONVERGE_THRESH = 0.005   # in cpd_inv units
+
+
+# ==========================================================
+# Geometry & cpd_inv conversion  (sf_cpp is per-condition)
+# ==========================================================
+
+def ppd_from_dist(dist_m, screen_width_px, screen_width_m):
+    """Pixels per degree at a given viewing distance."""
+    half_fov_deg = np.degrees(np.arctan(screen_width_m / (2.0 * dist_m)))
+    return screen_width_px / (2.0 * half_fov_deg)
+
+
+def dist_from_ppd(ppd, screen_width_px, screen_width_m):
+    """Viewing distance (m) that yields the given ppd."""
+    half_fov_deg = screen_width_px / (2.0 * ppd)
+    return screen_width_m / (2.0 * np.tan(np.radians(half_fov_deg)))
+
+
+def cpd_inv_from_dist(dist_m, sf_cpp, screen_width_px, screen_width_m):
+    """distance → cpd_inv for a given spatial frequency sf_cpp (cycles/pixel)."""
+    ppd     = ppd_from_dist(dist_m, screen_width_px, screen_width_m)
+    cpd     = ppd * sf_cpp
+    cpd_inv = -(cpd ** (1.0 / 3.0))
+    return float(cpd_inv)
+
+
+def dist_from_cpd_inv(cpd_inv, sf_cpp, screen_width_px, screen_width_m):
+    """cpd_inv → distance (m) for a given spatial frequency sf_cpp."""
+    cpd  = (-cpd_inv) ** 3.0
+    ppd  = cpd / sf_cpp
+    return float(dist_from_ppd(ppd, screen_width_px, screen_width_m))
+
+
+def cpd_inv_range_from_dist_range(min_dist, max_dist, sf_cpp,
+                                   screen_width_px, screen_width_m):
+    """
+    Returns (cpd_inv_near, cpd_inv_far).
+    Near (small dist) → high ppd → high cpd → less negative cpd_inv.
+    Far  (large dist) → low  ppd → low  cpd → more negative cpd_inv.
+    """
+    cpd_inv_near = cpd_inv_from_dist(min_dist, sf_cpp, screen_width_px, screen_width_m)
+    cpd_inv_far  = cpd_inv_from_dist(max_dist, sf_cpp, screen_width_px, screen_width_m)
+    return (cpd_inv_near, cpd_inv_far)   # e.g. (-0.8, -2.1)
 
 
 # ==========================================================
@@ -55,24 +104,42 @@ class PlatformController:
 
 
 # ==========================================================
-# Quest helpers
+# Quest helpers  —  all in cpd_inv space
 # ==========================================================
 
-def make_quest(start_val):
+def make_quest(start_cpd_inv, cpd_inv_range):
+    """
+    QuestHandler in cpd_inv space.
+    cpd_inv_range = (cpd_inv_near, cpd_inv_far),  near > far (less negative → more negative).
+    """
+    lo, hi = min(cpd_inv_range), max(cpd_inv_range)
+    span   = hi - lo
     return QuestHandler(
-        startVal   = -start_val,
-        startValSd = (MAX_DIST - MIN_DIST) / 4.0,
+        startVal   = start_cpd_inv,
+        startValSd = span / 2.0,
         pThreshold = 0.75,
         nTrials    = TRIALS_PER_CONDITION,
-        beta=3.5, delta=0.01, gamma=0.5,
-        grain=0.001, range=MAX_DIST - MIN_DIST,
-        minVal=-MAX_DIST, maxVal=-MIN_DIST,
+        beta=3.5, delta=0.05, gamma=0.5,
+        grain=0.01,
+        range=span,
+        minVal=lo,
+        maxVal=hi,
         method='quantile',
     )
 
-def quest_suggest(q): return float(np.clip(-q._questNextIntensity, MIN_DIST, MAX_DIST))
-def quest_mean(q):    return float(np.clip(-q.mean(),              MIN_DIST, MAX_DIST))
-def quest_sd(q):      return float(q.sd())
+
+def quest_suggest_cpd_inv(q, cpd_inv_range):
+    lo, hi = min(cpd_inv_range), max(cpd_inv_range)
+    return float(np.clip(q._questNextIntensity, lo, hi))
+
+
+def quest_mean_cpd_inv(q, cpd_inv_range):
+    lo, hi = min(cpd_inv_range), max(cpd_inv_range)
+    return float(np.clip(q.mean(), lo, hi))
+
+
+def quest_sd(q):
+    return float(q.sd())
 
 
 # ==========================================================
@@ -85,11 +152,12 @@ def init_quest_csv(path):
     w  = csv.writer(fh)
     if empty:
         w.writerow([
-            "name","color","speed_px_per_sec","contrast","mean_luminance",
-            "spatial_frequency_cpp","diagonal_inch","visual_radius_deg",
-            "trial_index","distance_m_tested","test_interval",
-            "observer_response","correct","quest_estimate_m",
-            "retinal_spatial_freq_cpd","temporal_freq_hz",
+            "name", "color", "speed_px_per_sec", "contrast", "mean_luminance",
+            "spatial_frequency_cpp", "diagonal_inch", "visual_radius_deg",
+            "trial_index", "distance_m_tested", "cpd_inv_tested",
+            "test_interval", "observer_response", "correct",
+            "quest_estimate_cpd_inv", "quest_estimate_m", "quest_sd_cpd_inv",
+            "retinal_spatial_freq_cpd", "temporal_freq_hz",
         ])
     return fh, w
 
@@ -127,26 +195,22 @@ def load_completed_conditions(name, csv_path=QUEST_CSV):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--name",                  default='YanchengCai')
+    parser.add_argument("--name", default='YanchengCai')
     # parser.add_argument("--name", default='Rafal Mantiuk')
     parser.add_argument("--colors",     nargs="+", default=["ach", "rg", "yv"])
 
-    # ---- 与 MOA 完全对齐的速度列表 ----
     parser.add_argument("--ach_speeds", nargs="+", type=float, default=[40, 80, 120, 180])
     parser.add_argument("--rg_speeds",  nargs="+", type=float, default=[50, 100, 150, 225])
     parser.add_argument("--yv_speeds",  nargs="+", type=float, default=[200, 400, 600])
 
-    # ---- 与 MOA 完全对齐的亮度列表 ----
     parser.add_argument("--ach_luminance_list", nargs="+", type=float, default=[5, 50])
     parser.add_argument("--rg_luminance_list",  nargs="+", type=float, default=[5, 50])
     parser.add_argument("--yv_luminance_list",  nargs="+", type=float, default=[5, 50])
 
-    # ---- 与 MOA 完全对齐的空间频率 ----
     parser.add_argument("--ach_spatial_frequency_cpp", type=float, default=0.25)
     parser.add_argument("--rg_spatial_frequency_cpp",  type=float, default=0.2)
     parser.add_argument("--yv_spatial_frequency_cpp",  type=float, default=0.05)
 
-    # ---- 与 MOA 完全对齐的对比度 ----
     parser.add_argument("--ach_contrast", type=float, default=0.9)
     parser.add_argument("--rg_contrast",  type=float, default=0.14)
     parser.add_argument("--yv_contrast",  type=float, default=0.92)
@@ -154,18 +218,16 @@ def main():
     parser.add_argument("--diagonal_inch",     type=float, default=27)
     parser.add_argument("--visual_radius_deg", type=float, default=2.0)
     parser.add_argument("--port",     default="/dev/ttyACM0")
-    parser.add_argument("--duration", type=float, default=2.0)
+    parser.add_argument("--duration", type=float, default=1.0)   # 1 s per interval
     parser.add_argument("--monitor_index", type=int, default=1)
     args = parser.parse_args()
 
-    # ---- 与 MOA 完全对齐的跳过条件 ----
     SKIP_CONDITIONS = {
         ("yv", 600,  5),
         ("yv", 200, 50),
         ("rg", 225,  5),
     }
 
-    # Build condition list
     conditions = []
     for color in args.colors:
         contrast = getattr(args, f"{color}_contrast")
@@ -181,7 +243,6 @@ def main():
                 })
     random.shuffle(conditions)
 
-    # Resume: skip completed conditions
     completed = load_completed_conditions(args.name)
     if completed:
         before     = len(conditions)
@@ -201,6 +262,9 @@ def main():
     )
     renderer.init_window()
 
+    screen_width_px = renderer.width
+    screen_width_m  = renderer.W
+
     experiment_start = time.perf_counter()
     aborted          = False
 
@@ -210,87 +274,111 @@ def main():
             contrast, lum  = cond['contrast'], cond['luminance']
             sf_cpp         = cond['spatial_frequency']
 
-            start_dist = float(np.clip(
+            # cpd_inv range is condition-specific (depends on sf_cpp)
+            cpd_inv_range = cpd_inv_range_from_dist_range(
+                MIN_DIST, MAX_DIST, sf_cpp, screen_width_px, screen_width_m)
+
+            # Starting point: MOA distance → cpd_inv
+            start_dist    = float(np.clip(
                 load_moa_distance(args.name, color, speed, lum),
                 MIN_DIST, MAX_DIST))
+            start_cpd_inv = cpd_inv_from_dist(
+                start_dist, sf_cpp, screen_width_px, screen_width_m)
 
             print(f"\n{'='*60}")
             print(f"Condition {cond_idx+1}/{total_conditions}")
-            print(f"  Color:{color}  Speed:{speed}px/s  Lum:{lum}cd/m²")
-            print(f"  Contrast:{contrast}  Quest start:{start_dist:.3f}m")
+            print(f"  Color:{color}  Speed:{speed}px/s  Lum:{lum}cd/m²  sf_cpp:{sf_cpp}")
+            print(f"  cpd_inv range: [{cpd_inv_range[0]:.4f}, {cpd_inv_range[1]:.4f}]")
+            print(f"  MOA dist:{start_dist:.3f}m  start_cpd_inv:{start_cpd_inv:.4f}")
             print('='*60)
 
-            quest = make_quest(start_dist)
+            quest = make_quest(start_cpd_inv, cpd_inv_range)
 
-            # Pre-generate balanced interval sequence
             half = TRIALS_PER_CONDITION // 2
             interval_seq = [1]*half + [2]*half
             random.shuffle(interval_seq)
             seq_idx = 0
 
-            prev_dist     = None
-            last_step_mm  = 0.0
-            converged     = False
-            trial_idx     = 0
+            prev_cpd_inv = None
+            last_step    = 0.0
+            converged    = False
+            trial_idx    = 0
+            dist         = start_dist   # fallback for progress screen
 
             for trial_idx in range(TRIALS_PER_CONDITION):
-                dist = quest_suggest(quest)
 
-                # Convergence early-stop
-                if prev_dist is not None:
-                    step = abs(dist - prev_dist)
-                    last_step_mm = step * 1000
+                # ---- Quest suggestion in cpd_inv space ----
+                cpd_inv_test = quest_suggest_cpd_inv(quest, cpd_inv_range)
+
+                # Convergence check in cpd_inv space
+                if prev_cpd_inv is not None:
+                    step = abs(cpd_inv_test - prev_cpd_inv)
+                    last_step = step
                     if step < QUEST_CONVERGE_THRESH:
-                        print(f"  [CONVERGE] step {step*1000:.2f}mm at trial {trial_idx+1}")
+                        print(f"  [CONVERGE] step={step:.5f} at trial {trial_idx+1}")
                         converged = True
                         break
-                prev_dist = dist
+                prev_cpd_inv = cpd_inv_test
+
+                # ---- cpd_inv → distance for platform ----
+                dist = float(np.clip(
+                    dist_from_cpd_inv(cpd_inv_test, sf_cpp, screen_width_px, screen_width_m),
+                    MIN_DIST, MAX_DIST))
 
                 test_interval = interval_seq[seq_idx % len(interval_seq)]
                 seq_idx += 1
 
                 # ---- Move platform & set colour ----
-                dist = float(np.clip(dist, MIN_DIST, MAX_DIST))
                 platform.move_to(dist)
                 renderer.set_condition(color, lum)
 
-                # ---- 2AFC trial ----
+                # ---- 2AFC trial (1 s per interval) ----
                 if renderer.show_interval_cue(1, dist): aborted = True; break
                 c1 = contrast if test_interval == 1 else 0.0
                 if renderer.show_gabor(c1, dist, sf_cpp, speed, args.duration):
-                    aborted = True
-                    break
+                    aborted = True; break
                 renderer.show_flat(dist, (0.2, 0.2, 0.2))
                 time.sleep(0.3)
                 if renderer.show_interval_cue(2, dist): aborted = True; break
                 c2 = contrast if test_interval == 2 else 0.0
                 if renderer.show_gabor(c2, dist, sf_cpp, speed, args.duration):
-                    aborted = True
-                    break
+                    aborted = True; break
                 renderer.show_flat(dist, (0.2, 0.2, 0.2))
+
                 chosen, esc = renderer.wait_for_response(dist)
                 if esc: aborted = True; break
 
                 correct = int(chosen == test_interval)
-                clamped_dist = float(np.clip(dist, MIN_DIST, MAX_DIST))
-                quest.addResponse(correct, intensity=-clamped_dist)
 
+                # ---- Update Quest in cpd_inv space ----
+                quest.addResponse(correct, intensity=cpd_inv_test)
+
+                # ---- Logging ----
                 rho_cpd, omega, _ = compute_spatiotemporal_frequency(
                     renderer.width, renderer.W, dist, sf_cpp, speed)
+
+                est_cpd_inv = quest_mean_cpd_inv(quest, cpd_inv_range)
+                est_dist    = float(np.clip(
+                    dist_from_cpd_inv(est_cpd_inv, sf_cpp, screen_width_px, screen_width_m),
+                    MIN_DIST, MAX_DIST))
 
                 writer.writerow([
                     args.name, color, speed, contrast, lum, sf_cpp,
                     args.diagonal_inch, args.visual_radius_deg,
-                    trial_idx, round(dist,4), test_interval, chosen, correct,
-                    round(quest_mean(quest),4), round(rho_cpd,4), round(omega,4),
+                    trial_idx,
+                    round(dist, 4), round(cpd_inv_test, 5),
+                    test_interval, chosen, correct,
+                    round(est_cpd_inv, 5), round(est_dist, 4),
+                    round(quest_sd(quest), 5),
+                    round(rho_cpd, 4), round(omega, 4),
                 ])
                 fh.flush()
 
-                print(f"  Trial {trial_idx+1:2d}: dist={dist:.3f}m  "
-                      f"int={test_interval}  chosen={chosen}  "
-                      f"ok={bool(correct)}  "
-                      f"est={quest_mean(quest):.3f}m  "
-                      f"step={last_step_mm:.1f}mm  "
+                print(f"  Trial {trial_idx+1:2d}: "
+                      f"dist={dist:.3f}m  cpd_inv={cpd_inv_test:.4f}  "
+                      f"int={test_interval}  chosen={chosen}  ok={bool(correct)}  "
+                      f"est={est_cpd_inv:.4f}({est_dist:.3f}m)  "
+                      f"step={last_step:.5f}  "
                       f"sf={rho_cpd:.3f}cpd  tf={omega:.2f}hz")
 
             if aborted:
@@ -298,8 +386,14 @@ def main():
                 break
 
             if converged:
-                print(f"  Converged after {trial_idx} trials "
-                      f"(est={quest_mean(quest):.4f}m, SD={quest_sd(quest):.4f}m)")
+                print(f"  Converged after {trial_idx} trials.")
+
+            est_cpd_inv = quest_mean_cpd_inv(quest, cpd_inv_range)
+            est_dist    = float(np.clip(
+                dist_from_cpd_inv(est_cpd_inv, sf_cpp, screen_width_px, screen_width_m),
+                MIN_DIST, MAX_DIST))
+            print(f"\n  Final estimate: cpd_inv={est_cpd_inv:.5f}  "
+                  f"dist={est_dist:.4f}m  SD={quest_sd(quest):.5f}")
 
             elapsed = time.perf_counter() - experiment_start
             esc = renderer.show_progress_screen(
@@ -310,9 +404,6 @@ def main():
                 aborted = True
                 print("\n[ESC] Aborted at progress screen.")
                 break
-
-            print(f"\n  Final estimate: {quest_mean(quest):.4f}m  "
-                  f"(SD={quest_sd(quest):.4f}m)")
 
     finally:
         platform.cleanup()
