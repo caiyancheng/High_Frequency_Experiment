@@ -131,7 +131,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--repeat", type=int, default=5)
     parser.add_argument("--output", type=str,
-                        default="Measure_specbos/rgb_xyz_measure_B100_C100_s800.json")
+                        default="Measure_specbos/rgb_xyz_measure_B100_C100_s800_dark.json")
 
     args = parser.parse_args()
 

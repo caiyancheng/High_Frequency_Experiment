@@ -234,7 +234,7 @@ def main():
 
             output_path = os.path.join(
                 args.output_dir,
-                f"luminance_pixel_measure_patch{square_size}.json"
+                f"luminance_pixel_measure_patch{square_size}_dark.json"
             )
 
             measure_patch_size(

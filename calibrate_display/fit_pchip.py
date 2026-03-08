@@ -23,7 +23,9 @@ PLOT_LOG = args.plot_log
 # =========================================================
 # Load data
 # =========================================================
-with open("Measure_specbos/luminance_pixel_measure_B100_C100_s800.json", "r") as f:
+# with open("Measure_specbos/luminance_pixel_measure_B100_C100_s800.json", "r") as f:
+#     data = json.load(f)
+with open("Measure_specbos/luminance_pixel_measure_patch800_dark.json", "r") as f:
     data = json.load(f)
 
 pixels = []
@@ -76,7 +78,7 @@ model = {
     "luminance_samples": Y_fit.tolist()
 }
 
-with open("Measure_specbos/pixel_luminance_model_pchip_B100_C100_s800.json", "w") as f:
+with open("Measure_specbos/pixel_luminance_model_pchip_B100_C100_s800_dark.json", "w") as f:
     json.dump(model, f, indent=4)
 
 print("Saved pixel_luminance_model_pchip.json")
