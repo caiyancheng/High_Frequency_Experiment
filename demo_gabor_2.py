@@ -20,8 +20,8 @@ MONITOR_INDEX         = 1
 COLOR_DIRECTION       = "yv"
 CONTRAST              = 0.92
 SPATIAL_FREQ_CPP      = 0.1
-SPEED_PX_PER_SEC      = 100
-MEAN_LUMINANCE        = 5
+SPEED_PX_PER_SEC      = 300 #180
+MEAN_LUMINANCE        = 50
 DISTANCE_M            = 2.6
 STIMULUS_DURATION_SEC = 100.0
 # ──────────────────────────────────────────────────────────────────────────────
@@ -88,8 +88,8 @@ def main():
         diagonal_inch=DIAGONAL_INCH,
         visual_radius_deg=VISUAL_RADIUS_DEG,
         monitor_index=MONITOR_INDEX,
-        lut_json_path="calibrate_display/Measure_specbos/pixel_luminance_model_pchip_B100_C100_s800_dark.json"
-    # lut_json_path = "calibrate_display/Measure_specbos/pixel_luminance_model_pchip_B100_C100_s800.json"
+        # lut_json_path="calibrate_display/Measure_specbos/pixel_luminance_model_pchip_B100_C100_s800_dark.json"
+        lut_json_path = "calibrate_display/Measure_specbos/pixel_luminance_model_pchip_B100_C100_s800.json"
     )
     renderer.init_window()
     renderer.set_condition(COLOR_DIRECTION, MEAN_LUMINANCE)

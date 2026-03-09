@@ -1,0 +1,481 @@
+/home/yc613/anaconda3/envs/HF_py310/bin/python3 /home/yc613/Py_codes/High_Frequency_Experiment/Quest_ST_HF_bright.py
+Connecting to /dev/ttyACM0, waiting for reset...
+Connected successfully!
+Reset signal sent and waited 2s.
+
+============================================================
+Condition 1/11
+  Color:rg  Speed:75px/s  Lum:50cd/m²  sf_cpp:0.2
+  cpd_inv range: [-2.4871, -3.3924]
+  MOA dist:1.700m  start_cpd_inv:-2.9501
+============================================================
+  Trial  1: dist=1.700m  cpd_inv=-2.9501  int=1  chosen=1  ok=True  est=-3.0084(1.805m)  step=0.00000  sf=25.675cpd  tf=15.00hz
+  Trial  2: dist=1.700m  cpd_inv=-2.9501  int=1  chosen=1  ok=True  est=-3.0598(1.901m)  step=0.00000  sf=25.675cpd  tf=15.00hz
+  Trial  3: dist=1.700m  cpd_inv=-2.9501  int=2  chosen=2  ok=True  est=-3.1018(1.981m)  step=0.00000  sf=25.675cpd  tf=15.00hz
+  Trial  4: dist=1.981m  cpd_inv=-3.1019  int=2  chosen=2  ok=True  est=-3.1436(2.064m)  step=0.15184  sf=29.847cpd  tf=15.00hz
+  Trial  5: dist=1.981m  cpd_inv=-3.1019  int=2  chosen=2  ok=True  est=-3.1788(2.135m)  step=0.15184  sf=29.847cpd  tf=15.00hz
+  Trial  6: dist=1.981m  cpd_inv=-3.1019  int=2  chosen=2  ok=True  est=-3.2072(2.193m)  step=0.15184  sf=29.847cpd  tf=15.00hz
+  Trial  7: dist=2.208m  cpd_inv=-3.2142  int=2  chosen=2  ok=True  est=-3.2333(2.248m)  step=0.11228  sf=33.206cpd  tf=15.00hz
+  Trial  8: dist=2.208m  cpd_inv=-3.2142  int=2  chosen=2  ok=True  est=-3.2556(2.295m)  step=0.11228  sf=33.206cpd  tf=15.00hz
+  Trial  9: dist=2.208m  cpd_inv=-3.2142  int=2  chosen=2  ok=True  est=-3.2743(2.335m)  step=0.11228  sf=33.206cpd  tf=15.00hz
+  Trial 10: dist=2.358m  cpd_inv=-3.2846  int=2  chosen=2  ok=True  est=-3.2902(2.370m)  step=0.07043  sf=35.437cpd  tf=15.00hz
+  Trial 11: dist=2.358m  cpd_inv=-3.2846  int=1  chosen=1  ok=True  est=-3.3040(2.400m)  step=0.07043  sf=35.437cpd  tf=15.00hz
+  Trial 12: dist=2.358m  cpd_inv=-3.2846  int=1  chosen=2  ok=False  est=-3.2591(2.303m)  step=0.07043  sf=35.437cpd  tf=15.00hz
+  Trial 13: dist=2.318m  cpd_inv=-3.2662  int=1  chosen=1  ok=True  est=-3.2746(2.336m)  step=0.01848  sf=34.843cpd  tf=15.00hz
+  Trial 14: dist=2.318m  cpd_inv=-3.2662  int=1  chosen=1  ok=True  est=-3.2882(2.366m)  step=0.01848  sf=34.843cpd  tf=15.00hz
+  Trial 15: dist=2.318m  cpd_inv=-3.2662  int=2  chosen=2  ok=True  est=-3.3001(2.392m)  step=0.01848  sf=34.843cpd  tf=15.00hz
+  Trial 16: dist=2.408m  cpd_inv=-3.3076  int=2  chosen=1  ok=False  est=-3.2696(2.325m)  step=0.04141  sf=36.185cpd  tf=15.00hz
+  Trial 17: dist=2.408m  cpd_inv=-3.3076  int=2  chosen=1  ok=False  est=-3.2397(2.261m)  step=0.04141  sf=36.185cpd  tf=15.00hz
+  Trial 18: dist=2.408m  cpd_inv=-3.3076  int=2  chosen=1  ok=False  est=-3.2119(2.203m)  step=0.04141  sf=36.185cpd  tf=15.00hz
+  Trial 19: dist=2.217m  cpd_inv=-3.2186  int=1  chosen=1  ok=True  est=-3.2272(2.235m)  step=0.08894  sf=33.344cpd  tf=15.00hz
+  Trial 20: dist=2.217m  cpd_inv=-3.2186  int=1  chosen=1  ok=True  est=-3.2408(2.264m)  step=0.08894  sf=33.344cpd  tf=15.00hz
+  Trial 21: dist=2.217m  cpd_inv=-3.2186  int=1  chosen=1  ok=True  est=-3.2528(2.289m)  step=0.08894  sf=33.344cpd  tf=15.00hz
+  Trial 22: dist=2.297m  cpd_inv=-3.2564  int=2  chosen=2  ok=True  est=-3.2634(2.312m)  step=0.03781  sf=34.533cpd  tf=15.00hz
+  Trial 23: dist=2.297m  cpd_inv=-3.2564  int=1  chosen=1  ok=True  est=-3.2730(2.333m)  step=0.03781  sf=34.533cpd  tf=15.00hz
+  Trial 24: dist=2.297m  cpd_inv=-3.2564  int=1  chosen=1  ok=True  est=-3.2817(2.351m)  step=0.03781  sf=34.533cpd  tf=15.00hz
+  Trial 25: dist=2.357m  cpd_inv=-3.2841  int=1  chosen=1  ok=True  est=-3.2897(2.369m)  step=0.02763  sf=35.419cpd  tf=15.00hz
+  Trial 26: dist=2.357m  cpd_inv=-3.2841  int=2  chosen=2  ok=True  est=-3.2970(2.385m)  step=0.02763  sf=35.419cpd  tf=15.00hz
+  Trial 27: dist=2.357m  cpd_inv=-3.2841  int=1  chosen=1  ok=True  est=-3.3037(2.400m)  step=0.02763  sf=35.419cpd  tf=15.00hz
+  Trial 28: dist=2.404m  cpd_inv=-3.3056  int=2  chosen=2  ok=True  est=-3.3099(2.413m)  step=0.02155  sf=36.121cpd  tf=15.00hz
+  Trial 29: dist=2.404m  cpd_inv=-3.3056  int=1  chosen=2  ok=False  est=-3.2921(2.374m)  step=0.02155  sf=36.121cpd  tf=15.00hz
+  Trial 30: dist=2.404m  cpd_inv=-3.3056  int=1  chosen=1  ok=True  est=-3.2984(2.388m)  step=0.02155  sf=36.121cpd  tf=15.00hz
+
+  Final estimate: cpd_inv=-3.29844  dist=2.3880m  SD=0.06217
+
+  Condition 1 of 11  (9%)
+  Elapsed: 2m 52s
+
+
+============================================================
+Condition 2/11
+  Color:ach  Speed:180px/s  Lum:50cd/m²  sf_cpp:0.25
+  cpd_inv range: [-2.6792, -3.6543]
+  MOA dist:1.150m  start_cpd_inv:-2.8006
+============================================================
+  Trial  1: dist=1.150m  cpd_inv=-2.8006  int=2  chosen=2  ok=True  est=-2.8638(1.233m)  step=0.00000  sf=21.966cpd  tf=45.00hz
+  Trial  2: dist=1.150m  cpd_inv=-2.8006  int=2  chosen=2  ok=True  est=-2.9191(1.309m)  step=0.00000  sf=21.966cpd  tf=45.00hz
+  Trial  3: dist=1.150m  cpd_inv=-2.8006  int=1  chosen=1  ok=True  est=-2.9639(1.372m)  step=0.00000  sf=21.966cpd  tf=45.00hz
+  Trial  4: dist=1.371m  cpd_inv=-2.9631  int=2  chosen=1  ok=False  est=-2.8085(1.160m)  step=0.16245  sf=26.015cpd  tf=45.00hz
+  Trial  5: dist=1.371m  cpd_inv=-2.9631  int=2  chosen=2  ok=True  est=-2.8462(1.210m)  step=0.16245  sf=26.015cpd  tf=45.00hz
+  Trial  6: dist=1.371m  cpd_inv=-2.9631  int=2  chosen=2  ok=True  est=-2.8845(1.261m)  step=0.16245  sf=26.015cpd  tf=45.00hz
+  Trial  7: dist=1.272m  cpd_inv=-2.8923  int=2  chosen=1  ok=False  est=-2.7599(1.098m)  step=0.07078  sf=24.195cpd  tf=45.00hz
+  Trial  8: dist=1.272m  cpd_inv=-2.8923  int=2  chosen=1  ok=False  est=-2.6920(1.015m)  step=0.07078  sf=24.195cpd  tf=45.00hz
+  Trial  9: dist=1.272m  cpd_inv=-2.8923  int=1  chosen=1  ok=True  est=-2.7191(1.048m)  step=0.07078  sf=24.195cpd  tf=45.00hz
+  Trial 10: dist=1.051m  cpd_inv=-2.7213  int=2  chosen=2  ok=True  est=-2.7546(1.092m)  step=0.17100  sf=20.152cpd  tf=45.00hz
+  Trial 11: dist=1.051m  cpd_inv=-2.7213  int=1  chosen=1  ok=True  est=-2.7852(1.130m)  step=0.17100  sf=20.152cpd  tf=45.00hz
+  Trial 12: dist=1.051m  cpd_inv=-2.7213  int=1  chosen=1  ok=True  est=-2.8103(1.163m)  step=0.17100  sf=20.152cpd  tf=45.00hz
+  Trial 13: dist=1.177m  cpd_inv=-2.8218  int=1  chosen=1  ok=True  est=-2.8325(1.191m)  step=0.10053  sf=22.469cpd  tf=45.00hz
+  Trial 14: dist=1.177m  cpd_inv=-2.8218  int=1  chosen=1  ok=True  est=-2.8518(1.217m)  step=0.10053  sf=22.469cpd  tf=45.00hz
+  Trial 15: dist=1.177m  cpd_inv=-2.8218  int=1  chosen=2  ok=False  est=-2.7858(1.131m)  step=0.10053  sf=22.469cpd  tf=45.00hz
+  Trial 16: dist=1.148m  cpd_inv=-2.7988  int=1  chosen=1  ok=True  est=-2.8060(1.157m)  step=0.02302  sf=21.923cpd  tf=45.00hz
+  Trial 17: dist=1.148m  cpd_inv=-2.7988  int=2  chosen=2  ok=True  est=-2.8236(1.180m)  step=0.02302  sf=21.923cpd  tf=45.00hz
+  Trial 18: dist=1.148m  cpd_inv=-2.7988  int=2  chosen=2  ok=True  est=-2.8388(1.200m)  step=0.02302  sf=21.923cpd  tf=45.00hz
+  Trial 19: dist=1.208m  cpd_inv=-2.8449  int=1  chosen=1  ok=True  est=-2.8520(1.217m)  step=0.04615  sf=23.026cpd  tf=45.00hz
+  Trial 20: dist=1.208m  cpd_inv=-2.8449  int=1  chosen=1  ok=True  est=-2.8637(1.233m)  step=0.04615  sf=23.026cpd  tf=45.00hz
+  Trial 21: dist=1.208m  cpd_inv=-2.8449  int=2  chosen=2  ok=True  est=-2.8742(1.247m)  step=0.04615  sf=23.026cpd  tf=45.00hz
+  Trial 22: dist=1.249m  cpd_inv=-2.8753  int=2  chosen=2  ok=True  est=-2.8837(1.260m)  step=0.03039  sf=23.772cpd  tf=45.00hz
+  Trial 23: dist=1.249m  cpd_inv=-2.8753  int=1  chosen=1  ok=True  est=-2.8925(1.272m)  step=0.03039  sf=23.772cpd  tf=45.00hz
+  Trial 24: dist=1.249m  cpd_inv=-2.8753  int=2  chosen=2  ok=True  est=-2.9007(1.283m)  step=0.03039  sf=23.772cpd  tf=45.00hz
+  Trial 25: dist=1.281m  cpd_inv=-2.8989  int=1  chosen=1  ok=True  est=-2.9085(1.294m)  step=0.02357  sf=24.361cpd  tf=45.00hz
+  Trial 26: dist=1.281m  cpd_inv=-2.8989  int=1  chosen=2  ok=False  est=-2.8842(1.261m)  step=0.02357  sf=24.361cpd  tf=45.00hz
+  Trial 27: dist=1.281m  cpd_inv=-2.8989  int=2  chosen=2  ok=True  est=-2.8914(1.270m)  step=0.02357  sf=24.361cpd  tf=45.00hz
+  Trial 28: dist=1.271m  cpd_inv=-2.8915  int=1  chosen=1  ok=True  est=-2.8983(1.280m)  step=0.00739  sf=24.176cpd  tf=45.00hz
+  Trial 29: dist=1.271m  cpd_inv=-2.8915  int=1  chosen=1  ok=True  est=-2.9048(1.289m)  step=0.00739  sf=24.176cpd  tf=45.00hz
+  Trial 30: dist=1.271m  cpd_inv=-2.8915  int=2  chosen=2  ok=True  est=-2.9110(1.297m)  step=0.00739  sf=24.176cpd  tf=45.00hz
+
+  Final estimate: cpd_inv=-2.91098  dist=1.2973m  SD=0.06163
+
+  Condition 2 of 11  (18%)
+  Elapsed: 5m 44s
+
+
+============================================================
+Condition 3/11
+  Color:yv  Speed:600px/s  Lum:50cd/m²  sf_cpp:0.05
+  cpd_inv range: [-1.5668, -2.1371]
+  MOA dist:1.500m  start_cpd_inv:-1.7842
+============================================================
+  Trial  1: dist=1.500m  cpd_inv=-1.7842  int=1  chosen=1  ok=True  est=-1.8159(1.583m)  step=0.00000  sf=5.680cpd  tf=30.00hz
+  Trial  2: dist=1.500m  cpd_inv=-1.7842  int=2  chosen=2  ok=True  est=-1.8452(1.663m)  step=0.00000  sf=5.680cpd  tf=30.00hz
+  Trial  3: dist=1.500m  cpd_inv=-1.7842  int=2  chosen=1  ok=False  est=-1.7280(1.359m)  step=0.00000  sf=5.680cpd  tf=30.00hz
+  Trial  4: dist=1.300m  cpd_inv=-1.7035  int=1  chosen=1  ok=True  est=-1.7503(1.414m)  step=0.08071  sf=4.943cpd  tf=30.00hz
+  Trial  5: dist=1.300m  cpd_inv=-1.7035  int=2  chosen=2  ok=True  est=-1.7712(1.467m)  step=0.08071  sf=4.943cpd  tf=30.00hz
+  Trial  6: dist=1.300m  cpd_inv=-1.7035  int=2  chosen=2  ok=True  est=-1.7904(1.516m)  step=0.08071  sf=4.943cpd  tf=30.00hz
+  Trial  7: dist=1.491m  cpd_inv=-1.7806  int=2  chosen=2  ok=True  est=-1.8108(1.570m)  step=0.07708  sf=5.645cpd  tf=30.00hz
+  Trial  8: dist=1.491m  cpd_inv=-1.7806  int=1  chosen=1  ok=True  est=-1.8298(1.621m)  step=0.07708  sf=5.645cpd  tf=30.00hz
+  Trial  9: dist=1.491m  cpd_inv=-1.7806  int=1  chosen=1  ok=True  est=-1.8471(1.669m)  step=0.07708  sf=5.645cpd  tf=30.00hz
+  Trial 10: dist=1.649m  cpd_inv=-1.8400  int=2  chosen=2  ok=True  est=-1.8644(1.717m)  step=0.05947  sf=6.230cpd  tf=30.00hz
+  Trial 11: dist=1.649m  cpd_inv=-1.8400  int=1  chosen=1  ok=True  est=-1.8804(1.762m)  step=0.05947  sf=6.230cpd  tf=30.00hz
+  Trial 12: dist=1.649m  cpd_inv=-1.8400  int=1  chosen=1  ok=True  est=-1.8952(1.805m)  step=0.05947  sf=6.230cpd  tf=30.00hz
+  Trial 13: dist=1.783m  cpd_inv=-1.8878  int=2  chosen=2  ok=True  est=-1.9096(1.847m)  step=0.04773  sf=6.727cpd  tf=30.00hz
+  Trial 14: dist=1.783m  cpd_inv=-1.8878  int=2  chosen=1  ok=False  est=-1.8599(1.704m)  step=0.04773  sf=6.727cpd  tf=30.00hz
+  Trial 15: dist=1.783m  cpd_inv=-1.8878  int=2  chosen=1  ok=False  est=-1.8250(1.608m)  step=0.04773  sf=6.727cpd  tf=30.00hz
+  Trial 16: dist=1.609m  cpd_inv=-1.8253  int=1  chosen=1  ok=True  est=-1.8373(1.641m)  step=0.06251  sf=6.081cpd  tf=30.00hz
+  Trial 17: dist=1.609m  cpd_inv=-1.8253  int=1  chosen=1  ok=True  est=-1.8486(1.673m)  step=0.06251  sf=6.081cpd  tf=30.00hz
+  Trial 18: dist=1.609m  cpd_inv=-1.8253  int=1  chosen=1  ok=True  est=-1.8591(1.702m)  step=0.06251  sf=6.081cpd  tf=30.00hz
+  Trial 19: dist=1.698m  cpd_inv=-1.8578  int=2  chosen=2  ok=True  est=-1.8690(1.730m)  step=0.03255  sf=6.412cpd  tf=30.00hz
+  Trial 20: dist=1.698m  cpd_inv=-1.8578  int=2  chosen=2  ok=True  est=-1.8783(1.756m)  step=0.03255  sf=6.412cpd  tf=30.00hz
+  Trial 21: dist=1.698m  cpd_inv=-1.8578  int=2  chosen=1  ok=False  est=-1.8464(1.666m)  step=0.03255  sf=6.412cpd  tf=30.00hz
+  Trial 22: dist=1.668m  cpd_inv=-1.8469  int=1  chosen=1  ok=True  est=-1.8552(1.691m)  step=0.01095  sf=6.299cpd  tf=30.00hz
+  Trial 23: dist=1.668m  cpd_inv=-1.8469  int=1  chosen=1  ok=True  est=-1.8635(1.714m)  step=0.01095  sf=6.299cpd  tf=30.00hz
+  Trial 24: dist=1.668m  cpd_inv=-1.8469  int=1  chosen=1  ok=True  est=-1.8712(1.736m)  step=0.01095  sf=6.299cpd  tf=30.00hz
+  Trial 25: dist=1.733m  cpd_inv=-1.8701  int=2  chosen=2  ok=True  est=-1.8785(1.757m)  step=0.02329  sf=6.541cpd  tf=30.00hz
+  Trial 26: dist=1.733m  cpd_inv=-1.8701  int=2  chosen=2  ok=True  est=-1.8855(1.777m)  step=0.02329  sf=6.541cpd  tf=30.00hz
+  Trial 27: dist=1.733m  cpd_inv=-1.8701  int=1  chosen=2  ok=False  est=-1.8632(1.713m)  step=0.02329  sf=6.541cpd  tf=30.00hz
+  Trial 28: dist=1.714m  cpd_inv=-1.8633  int=1  chosen=1  ok=True  est=-1.8699(1.732m)  step=0.00681  sf=6.469cpd  tf=30.00hz
+  Trial 29: dist=1.714m  cpd_inv=-1.8633  int=2  chosen=1  ok=False  est=-1.8496(1.675m)  step=0.00681  sf=6.469cpd  tf=30.00hz
+  Trial 30: dist=1.714m  cpd_inv=-1.8633  int=1  chosen=2  ok=False  est=-1.8313(1.625m)  step=0.00681  sf=6.469cpd  tf=30.00hz
+
+  Final estimate: cpd_inv=-1.83133  dist=1.6251m  SD=0.06722
+
+  Condition 3 of 11  (27%)
+  Elapsed: 10m 36s
+
+
+============================================================
+Condition 4/11
+  Color:ach  Speed:80px/s  Lum:50cd/m²  sf_cpp:0.25
+  cpd_inv range: [-2.6792, -3.6543]
+  MOA dist:1.490m  start_cpd_inv:-3.0443
+============================================================
+  Trial  1: dist=1.490m  cpd_inv=-3.0443  int=1  chosen=1  ok=True  est=-3.1075(1.587m)  step=0.00000  sf=28.214cpd  tf=20.00hz
+  Trial  2: dist=1.490m  cpd_inv=-3.0443  int=1  chosen=1  ok=True  est=-3.1629(1.675m)  step=0.00000  sf=28.214cpd  tf=20.00hz
+  Trial  3: dist=1.490m  cpd_inv=-3.0443  int=1  chosen=1  ok=True  est=-3.2076(1.749m)  step=0.00000  sf=28.214cpd  tf=20.00hz
+  Trial  4: dist=1.748m  cpd_inv=-3.2068  int=1  chosen=1  ok=True  est=-3.2522(1.825m)  step=0.16245  sf=32.976cpd  tf=20.00hz
+  Trial  5: dist=1.748m  cpd_inv=-3.2068  int=2  chosen=2  ok=True  est=-3.2897(1.889m)  step=0.16245  sf=32.976cpd  tf=20.00hz
+  Trial  6: dist=1.748m  cpd_inv=-3.2068  int=2  chosen=2  ok=True  est=-3.3197(1.942m)  step=0.16245  sf=32.976cpd  tf=20.00hz
+  Trial  7: dist=1.954m  cpd_inv=-3.3259  int=2  chosen=1  ok=False  est=-3.2263(1.780m)  step=0.11917  sf=36.791cpd  tf=20.00hz
+  Trial  8: dist=1.954m  cpd_inv=-3.3259  int=1  chosen=1  ok=True  est=-3.2543(1.828m)  step=0.11917  sf=36.791cpd  tf=20.00hz
+  Trial  9: dist=1.954m  cpd_inv=-3.3259  int=2  chosen=1  ok=False  est=-3.1902(1.720m)  step=0.11917  sf=36.791cpd  tf=20.00hz
+  Trial 10: dist=1.743m  cpd_inv=-3.2039  int=1  chosen=1  ok=True  est=-3.2191(1.768m)  step=0.12203  sf=32.888cpd  tf=20.00hz
+  Trial 11: dist=1.743m  cpd_inv=-3.2039  int=2  chosen=2  ok=True  est=-3.2439(1.810m)  step=0.12203  sf=32.888cpd  tf=20.00hz
+  Trial 12: dist=1.743m  cpd_inv=-3.2039  int=2  chosen=2  ok=True  est=-3.2646(1.846m)  step=0.12203  sf=32.888cpd  tf=20.00hz
+  Trial 13: dist=1.855m  cpd_inv=-3.2698  int=1  chosen=1  ok=True  est=-3.2827(1.877m)  step=0.06594  sf=34.961cpd  tf=20.00hz
+  Trial 14: dist=1.855m  cpd_inv=-3.2698  int=2  chosen=2  ok=True  est=-3.2988(1.905m)  step=0.06594  sf=34.961cpd  tf=20.00hz
+  Trial 15: dist=1.855m  cpd_inv=-3.2698  int=1  chosen=1  ok=True  est=-3.3130(1.931m)  step=0.06594  sf=34.961cpd  tf=20.00hz
+  Trial 16: dist=1.931m  cpd_inv=-3.3134  int=1  chosen=1  ok=True  est=-3.3259(1.954m)  step=0.04356  sf=36.377cpd  tf=20.00hz
+  Trial 17: dist=1.931m  cpd_inv=-3.3134  int=2  chosen=2  ok=True  est=-3.3378(1.975m)  step=0.04356  sf=36.377cpd  tf=20.00hz
+  Trial 18: dist=1.931m  cpd_inv=-3.3134  int=2  chosen=1  ok=False  est=-3.2978(1.904m)  step=0.04356  sf=36.377cpd  tf=20.00hz
+  Trial 19: dist=1.908m  cpd_inv=-3.3000  int=1  chosen=2  ok=False  est=-3.2628(1.843m)  step=0.01338  sf=35.938cpd  tf=20.00hz
+  Trial 20: dist=1.908m  cpd_inv=-3.3000  int=2  chosen=2  ok=True  est=-3.2750(1.864m)  step=0.01338  sf=35.938cpd  tf=20.00hz
+  Trial 21: dist=1.908m  cpd_inv=-3.3000  int=1  chosen=1  ok=True  est=-3.2862(1.883m)  step=0.01338  sf=35.938cpd  tf=20.00hz
+  Trial 22: dist=1.889m  cpd_inv=-3.2895  int=1  chosen=1  ok=True  est=-3.2967(1.902m)  step=0.01052  sf=35.595cpd  tf=20.00hz
+  Trial 23: dist=1.889m  cpd_inv=-3.2895  int=1  chosen=1  ok=True  est=-3.3062(1.918m)  step=0.01052  sf=35.595cpd  tf=20.00hz
+  Trial 24: dist=1.889m  cpd_inv=-3.2895  int=2  chosen=2  ok=True  est=-3.3149(1.934m)  step=0.01052  sf=35.595cpd  tf=20.00hz
+  Trial 25: dist=1.935m  cpd_inv=-3.3158  int=1  chosen=2  ok=False  est=-3.2898(1.890m)  step=0.02624  sf=36.454cpd  tf=20.00hz
+  Trial 26: dist=1.935m  cpd_inv=-3.3158  int=2  chosen=2  ok=True  est=-3.2983(1.904m)  step=0.02624  sf=36.454cpd  tf=20.00hz
+  Trial 27: dist=1.935m  cpd_inv=-3.3158  int=2  chosen=1  ok=False  est=-3.2760(1.866m)  step=0.02624  sf=36.454cpd  tf=20.00hz
+  Trial 28: dist=1.872m  cpd_inv=-3.2797  int=2  chosen=2  ok=True  est=-3.2847(1.881m)  step=0.03600  sf=35.279cpd  tf=20.00hz
+  Trial 29: dist=1.872m  cpd_inv=-3.2797  int=2  chosen=2  ok=True  est=-3.2927(1.895m)  step=0.03600  sf=35.279cpd  tf=20.00hz
+  Trial 30: dist=1.872m  cpd_inv=-3.2797  int=1  chosen=2  ok=False  est=-3.2686(1.853m)  step=0.03600  sf=35.279cpd  tf=20.00hz
+
+  Final estimate: cpd_inv=-3.26861  dist=1.8527m  SD=0.07768
+
+  Condition 4 of 11  (36%)
+  Elapsed: 13m 06s
+
+
+============================================================
+Condition 5/11
+  Color:rg  Speed:150px/s  Lum:50cd/m²  sf_cpp:0.2
+  cpd_inv range: [-2.4871, -3.3924]
+  MOA dist:1.090m  start_cpd_inv:-2.5559
+============================================================
+  Trial  1: dist=1.090m  cpd_inv=-2.5559  int=2  chosen=2  ok=True  est=-2.6142(1.170m)  step=0.00000  sf=16.696cpd  tf=30.00hz
+  Trial  2: dist=1.090m  cpd_inv=-2.5559  int=1  chosen=2  ok=False  est=-2.4871(1.000m)  step=0.00000  sf=16.696cpd  tf=30.00hz
+  Trial  3: dist=1.090m  cpd_inv=-2.5559  int=1  chosen=1  ok=True  est=-2.4871(1.000m)  step=0.00000  sf=16.696cpd  tf=30.00hz
+  Trial  4: dist=1.000m  cpd_inv=-2.4871  int=2  chosen=2  ok=True  est=-2.4895(1.003m)  step=0.06873  sf=15.385cpd  tf=30.00hz
+  Trial  5: dist=1.000m  cpd_inv=-2.4871  int=1  chosen=1  ok=True  est=-2.5297(1.055m)  step=0.06873  sf=15.385cpd  tf=30.00hz
+  Trial  6: dist=1.000m  cpd_inv=-2.4871  int=1  chosen=1  ok=True  est=-2.5660(1.104m)  step=0.06873  sf=15.385cpd  tf=30.00hz
+  Trial  7: dist=1.083m  cpd_inv=-2.5509  int=2  chosen=2  ok=True  est=-2.6014(1.152m)  step=0.06375  sf=16.599cpd  tf=30.00hz
+  Trial  8: dist=1.083m  cpd_inv=-2.5509  int=1  chosen=1  ok=True  est=-2.6331(1.197m)  step=0.06375  sf=16.599cpd  tf=30.00hz
+  Trial  9: dist=1.083m  cpd_inv=-2.5509  int=2  chosen=2  ok=True  est=-2.6607(1.236m)  step=0.06375  sf=16.599cpd  tf=30.00hz
+  Trial 10: dist=1.199m  cpd_inv=-2.6348  int=2  chosen=2  ok=True  est=-2.6898(1.279m)  step=0.08390  sf=18.291cpd  tf=30.00hz
+  Trial 11: dist=1.199m  cpd_inv=-2.6348  int=2  chosen=1  ok=False  est=-2.5811(1.124m)  step=0.08390  sf=18.291cpd  tf=30.00hz
+  Trial 12: dist=1.199m  cpd_inv=-2.6348  int=1  chosen=1  ok=True  est=-2.6026(1.154m)  step=0.08390  sf=18.291cpd  tf=30.00hz
+  Trial 13: dist=1.150m  cpd_inv=-2.6001  int=1  chosen=1  ok=True  est=-2.6231(1.182m)  step=0.03474  sf=17.577cpd  tf=30.00hz
+  Trial 14: dist=1.150m  cpd_inv=-2.6001  int=1  chosen=1  ok=True  est=-2.6417(1.209m)  step=0.03474  sf=17.577cpd  tf=30.00hz
+  Trial 15: dist=1.150m  cpd_inv=-2.6001  int=1  chosen=1  ok=True  est=-2.6586(1.233m)  step=0.03474  sf=17.577cpd  tf=30.00hz
+  Trial 16: dist=1.214m  cpd_inv=-2.6452  int=2  chosen=2  ok=True  est=-2.6757(1.258m)  step=0.04511  sf=18.508cpd  tf=30.00hz
+  Trial 17: dist=1.214m  cpd_inv=-2.6452  int=1  chosen=1  ok=True  est=-2.6921(1.282m)  step=0.04511  sf=18.508cpd  tf=30.00hz
+  Trial 18: dist=1.214m  cpd_inv=-2.6452  int=2  chosen=2  ok=True  est=-2.7078(1.306m)  step=0.04511  sf=18.508cpd  tf=30.00hz
+  Trial 19: dist=1.271m  cpd_inv=-2.6842  int=2  chosen=2  ok=True  est=-2.7247(1.331m)  step=0.03906  sf=19.340cpd  tf=30.00hz
+  Trial 20: dist=1.271m  cpd_inv=-2.6842  int=2  chosen=2  ok=True  est=-2.7413(1.356m)  step=0.03906  sf=19.340cpd  tf=30.00hz
+  Trial 21: dist=1.271m  cpd_inv=-2.6842  int=1  chosen=1  ok=True  est=-2.7575(1.381m)  step=0.03906  sf=19.340cpd  tf=30.00hz
+  Trial 22: dist=1.334m  cpd_inv=-2.7268  int=2  chosen=2  ok=True  est=-2.7752(1.409m)  step=0.04255  sf=20.274cpd  tf=30.00hz
+  Trial 23: dist=1.334m  cpd_inv=-2.7268  int=2  chosen=1  ok=False  est=-2.7042(1.300m)  step=0.04255  sf=20.274cpd  tf=30.00hz
+  Trial 24: dist=1.334m  cpd_inv=-2.7268  int=2  chosen=2  ok=True  est=-2.7162(1.318m)  step=0.04255  sf=20.274cpd  tf=30.00hz
+  Trial 25: dist=1.297m  cpd_inv=-2.7019  int=1  chosen=1  ok=True  est=-2.7282(1.336m)  step=0.02489  sf=19.724cpd  tf=30.00hz
+  Trial 26: dist=1.297m  cpd_inv=-2.7019  int=1  chosen=1  ok=True  est=-2.7400(1.354m)  step=0.02489  sf=19.724cpd  tf=30.00hz
+  Trial 27: dist=1.297m  cpd_inv=-2.7019  int=1  chosen=2  ok=False  est=-2.6954(1.287m)  step=0.02489  sf=19.724cpd  tf=30.00hz
+  Trial 28: dist=1.278m  cpd_inv=-2.6890  int=1  chosen=1  ok=True  est=-2.7042(1.300m)  step=0.01288  sf=19.444cpd  tf=30.00hz
+  Trial 29: dist=1.278m  cpd_inv=-2.6890  int=2  chosen=2  ok=True  est=-2.7127(1.313m)  step=0.01288  sf=19.444cpd  tf=30.00hz
+  Trial 30: dist=1.278m  cpd_inv=-2.6890  int=2  chosen=2  ok=True  est=-2.7211(1.325m)  step=0.01288  sf=19.444cpd  tf=30.00hz
+
+  Final estimate: cpd_inv=-2.72108  dist=1.3255m  SD=0.07528
+
+  Condition 5 of 11  (45%)
+  Elapsed: 15m 55s
+
+
+============================================================
+Condition 6/11
+  Color:ach  Speed:40px/s  Lum:50cd/m²  sf_cpp:0.25
+  cpd_inv range: [-2.6792, -3.6543]
+  MOA dist:1.710m  start_cpd_inv:-3.1840
+============================================================
+  Trial  1: dist=1.710m  cpd_inv=-3.1840  int=2  chosen=2  ok=True  est=-3.2472(1.816m)  step=0.00000  sf=32.279cpd  tf=10.00hz
+  Trial  2: dist=1.710m  cpd_inv=-3.1840  int=1  chosen=1  ok=True  est=-3.3025(1.912m)  step=0.00000  sf=32.279cpd  tf=10.00hz
+  Trial  3: dist=1.710m  cpd_inv=-3.1840  int=2  chosen=2  ok=True  est=-3.3473(1.992m)  step=0.00000  sf=32.279cpd  tf=10.00hz
+  Trial  4: dist=1.991m  cpd_inv=-3.3464  int=2  chosen=2  ok=True  est=-3.3919(2.074m)  step=0.16245  sf=37.476cpd  tf=10.00hz
+  Trial  5: dist=1.991m  cpd_inv=-3.3464  int=1  chosen=2  ok=False  est=-3.2295(1.786m)  step=0.16245  sf=37.476cpd  tf=10.00hz
+  Trial  6: dist=1.991m  cpd_inv=-3.3464  int=1  chosen=1  ok=True  est=-3.2679(1.852m)  step=0.16245  sf=37.476cpd  tf=10.00hz
+  Trial  7: dist=1.865m  cpd_inv=-3.2757  int=1  chosen=1  ok=True  est=-3.3057(1.918m)  step=0.07078  sf=35.148cpd  tf=10.00hz
+  Trial  8: dist=1.865m  cpd_inv=-3.2757  int=1  chosen=1  ok=True  est=-3.3379(1.975m)  step=0.07078  sf=35.148cpd  tf=10.00hz
+  Trial  9: dist=1.865m  cpd_inv=-3.2757  int=1  chosen=1  ok=True  est=-3.3644(2.023m)  step=0.07078  sf=35.148cpd  tf=10.00hz
+  Trial 10: dist=2.019m  cpd_inv=-3.3621  int=2  chosen=2  ok=True  est=-3.3894(2.069m)  step=0.08641  sf=38.003cpd  tf=10.00hz
+  Trial 11: dist=2.019m  cpd_inv=-3.3621  int=2  chosen=1  ok=False  est=-3.3061(1.918m)  step=0.08641  sf=38.003cpd  tf=10.00hz
+  Trial 12: dist=2.019m  cpd_inv=-3.3621  int=2  chosen=2  ok=True  est=-3.3279(1.957m)  step=0.08641  sf=38.003cpd  tf=10.00hz
+  Trial 13: dist=1.971m  cpd_inv=-3.3355  int=2  chosen=2  ok=True  est=-3.3483(1.994m)  step=0.02656  sf=37.110cpd  tf=10.00hz
+  Trial 14: dist=1.971m  cpd_inv=-3.3355  int=2  chosen=2  ok=True  est=-3.3662(2.027m)  step=0.02656  sf=37.110cpd  tf=10.00hz
+  Trial 15: dist=1.971m  cpd_inv=-3.3355  int=1  chosen=1  ok=True  est=-3.3819(2.055m)  step=0.02656  sf=37.110cpd  tf=10.00hz
+  Trial 16: dist=2.052m  cpd_inv=-3.3799  int=2  chosen=2  ok=True  est=-3.3965(2.083m)  step=0.04441  sf=38.612cpd  tf=10.00hz
+  Trial 17: dist=2.052m  cpd_inv=-3.3799  int=1  chosen=1  ok=True  est=-3.4101(2.108m)  step=0.04441  sf=38.612cpd  tf=10.00hz
+  Trial 18: dist=2.052m  cpd_inv=-3.3799  int=2  chosen=2  ok=True  est=-3.4227(2.132m)  step=0.04441  sf=38.612cpd  tf=10.00hz
+  Trial 19: dist=2.116m  cpd_inv=-3.4144  int=1  chosen=1  ok=True  est=-3.4351(2.155m)  step=0.03445  sf=39.804cpd  tf=10.00hz
+  Trial 20: dist=2.116m  cpd_inv=-3.4144  int=2  chosen=2  ok=True  est=-3.4471(2.178m)  step=0.03445  sf=39.804cpd  tf=10.00hz
+  Trial 21: dist=2.116m  cpd_inv=-3.4144  int=1  chosen=1  ok=True  est=-3.4586(2.200m)  step=0.03445  sf=39.804cpd  tf=10.00hz
+  Trial 22: dist=2.175m  cpd_inv=-3.4454  int=2  chosen=2  ok=True  est=-3.4704(2.223m)  step=0.03103  sf=40.899cpd  tf=10.00hz
+  Trial 23: dist=2.175m  cpd_inv=-3.4454  int=2  chosen=2  ok=True  est=-3.4820(2.246m)  step=0.03103  sf=40.899cpd  tf=10.00hz
+  Trial 24: dist=2.175m  cpd_inv=-3.4454  int=1  chosen=2  ok=False  est=-3.4372(2.159m)  step=0.03103  sf=40.899cpd  tf=10.00hz
+  Trial 25: dist=2.148m  cpd_inv=-3.4313  int=2  chosen=2  ok=True  est=-3.4462(2.177m)  step=0.01409  sf=40.400cpd  tf=10.00hz
+  Trial 26: dist=2.148m  cpd_inv=-3.4313  int=1  chosen=2  ok=False  est=-3.4167(2.120m)  step=0.01409  sf=40.400cpd  tf=10.00hz
+  Trial 27: dist=2.148m  cpd_inv=-3.4313  int=1  chosen=1  ok=True  est=-3.4245(2.135m)  step=0.01409  sf=40.400cpd  tf=10.00hz
+  Trial 28: dist=2.131m  cpd_inv=-3.4221  int=2  chosen=1  ok=False  est=-3.4013(2.091m)  step=0.00917  sf=40.077cpd  tf=10.00hz
+  Trial 29: dist=2.131m  cpd_inv=-3.4221  int=1  chosen=1  ok=True  est=-3.4085(2.105m)  step=0.00917  sf=40.077cpd  tf=10.00hz
+  Trial 30: dist=2.131m  cpd_inv=-3.4221  int=1  chosen=1  ok=True  est=-3.4154(2.118m)  step=0.00917  sf=40.077cpd  tf=10.00hz
+
+  Final estimate: cpd_inv=-3.41543  dist=2.1180m  SD=0.06599
+
+  Condition 6 of 11  (55%)
+  Elapsed: 18m 28s
+
+
+============================================================
+Condition 7/11
+  Color:yv  Speed:400px/s  Lum:50cd/m²  sf_cpp:0.05
+  cpd_inv range: [-1.5668, -2.1371]
+  MOA dist:2.140m  start_cpd_inv:-2.0042
+============================================================
+  Trial  1: dist=2.140m  cpd_inv=-2.0042  int=2  chosen=1  ok=False  est=-1.9043(1.832m)  step=0.00000  sf=8.050cpd  tf=20.00hz
+  Trial  2: dist=2.140m  cpd_inv=-2.0042  int=1  chosen=1  ok=True  est=-1.9253(1.894m)  step=0.00000  sf=8.050cpd  tf=20.00hz
+  Trial  3: dist=2.140m  cpd_inv=-2.0042  int=2  chosen=1  ok=False  est=-1.8768(1.752m)  step=0.00000  sf=8.050cpd  tf=20.00hz
+  Trial  4: dist=1.682m  cpd_inv=-1.8519  int=1  chosen=1  ok=True  est=-1.8919(1.795m)  step=0.15228  sf=6.351cpd  tf=20.00hz
+  Trial  5: dist=1.682m  cpd_inv=-1.8519  int=2  chosen=2  ok=True  est=-1.9068(1.839m)  step=0.15228  sf=6.351cpd  tf=20.00hz
+  Trial  6: dist=1.682m  cpd_inv=-1.8519  int=1  chosen=1  ok=True  est=-1.9212(1.882m)  step=0.15228  sf=6.351cpd  tf=20.00hz
+  Trial  7: dist=1.845m  cpd_inv=-1.9087  int=1  chosen=1  ok=True  est=-1.9365(1.928m)  step=0.05684  sf=6.954cpd  tf=20.00hz
+  Trial  8: dist=1.845m  cpd_inv=-1.9087  int=1  chosen=1  ok=True  est=-1.9511(1.972m)  step=0.05684  sf=6.954cpd  tf=20.00hz
+  Trial  9: dist=1.845m  cpd_inv=-1.9087  int=1  chosen=1  ok=True  est=-1.9647(2.014m)  step=0.05684  sf=6.954cpd  tf=20.00hz
+  Trial 10: dist=1.997m  cpd_inv=-1.9591  int=2  chosen=1  ok=False  est=-1.9187(1.874m)  step=0.05036  sf=7.519cpd  tf=20.00hz
+  Trial 11: dist=1.997m  cpd_inv=-1.9591  int=2  chosen=2  ok=True  est=-1.9310(1.911m)  step=0.05036  sf=7.519cpd  tf=20.00hz
+  Trial 12: dist=1.997m  cpd_inv=-1.9591  int=2  chosen=2  ok=True  est=-1.9431(1.948m)  step=0.05036  sf=7.519cpd  tf=20.00hz
+  Trial 13: dist=1.938m  cpd_inv=-1.9400  int=1  chosen=1  ok=True  est=-1.9548(1.984m)  step=0.01905  sf=7.302cpd  tf=20.00hz
+  Trial 14: dist=1.938m  cpd_inv=-1.9400  int=2  chosen=2  ok=True  est=-1.9660(2.018m)  step=0.01905  sf=7.302cpd  tf=20.00hz
+  Trial 15: dist=1.938m  cpd_inv=-1.9400  int=2  chosen=2  ok=True  est=-1.9764(2.051m)  step=0.01905  sf=7.302cpd  tf=20.00hz
+  Trial 16: dist=2.046m  cpd_inv=-1.9748  int=1  chosen=1  ok=True  est=-1.9864(2.083m)  step=0.03473  sf=7.701cpd  tf=20.00hz
+  Trial 17: dist=2.046m  cpd_inv=-1.9748  int=2  chosen=2  ok=True  est=-1.9959(2.113m)  step=0.03473  sf=7.701cpd  tf=20.00hz
+  Trial 18: dist=2.046m  cpd_inv=-1.9748  int=2  chosen=2  ok=True  est=-2.0049(2.142m)  step=0.03473  sf=7.701cpd  tf=20.00hz
+  Trial 19: dist=2.135m  cpd_inv=-2.0025  int=2  chosen=2  ok=True  est=-2.0136(2.171m)  step=0.02773  sf=8.030cpd  tf=20.00hz
+  Trial 20: dist=2.135m  cpd_inv=-2.0025  int=2  chosen=2  ok=True  est=-2.0219(2.198m)  step=0.02773  sf=8.030cpd  tf=20.00hz
+  Trial 21: dist=2.135m  cpd_inv=-2.0025  int=1  chosen=2  ok=False  est=-1.9941(2.108m)  step=0.02773  sf=8.030cpd  tf=20.00hz
+  Trial 22: dist=2.106m  cpd_inv=-1.9937  int=1  chosen=1  ok=True  est=-2.0017(2.132m)  step=0.00883  sf=7.924cpd  tf=20.00hz
+  Trial 23: dist=2.106m  cpd_inv=-1.9937  int=1  chosen=1  ok=True  est=-2.0090(2.156m)  step=0.00883  sf=7.924cpd  tf=20.00hz
+  Trial 24: dist=2.106m  cpd_inv=-1.9937  int=1  chosen=1  ok=True  est=-2.0159(2.178m)  step=0.00883  sf=7.924cpd  tf=20.00hz
+  Trial 25: dist=2.174m  cpd_inv=-2.0146  int=1  chosen=1  ok=True  est=-2.0225(2.200m)  step=0.02090  sf=8.176cpd  tf=20.00hz
+  Trial 26: dist=2.174m  cpd_inv=-2.0146  int=1  chosen=1  ok=True  est=-2.0289(2.221m)  step=0.02090  sf=8.176cpd  tf=20.00hz
+  Trial 27: dist=2.174m  cpd_inv=-2.0146  int=2  chosen=2  ok=True  est=-2.0350(2.242m)  step=0.02090  sf=8.176cpd  tf=20.00hz
+  Trial 28: dist=2.234m  cpd_inv=-2.0327  int=1  chosen=1  ok=True  est=-2.0410(2.262m)  step=0.01809  sf=8.398cpd  tf=20.00hz
+  Trial 29: dist=2.234m  cpd_inv=-2.0327  int=2  chosen=2  ok=True  est=-2.0468(2.281m)  step=0.01809  sf=8.398cpd  tf=20.00hz
+  Trial 30: dist=2.234m  cpd_inv=-2.0327  int=2  chosen=2  ok=True  est=-2.0526(2.301m)  step=0.01809  sf=8.398cpd  tf=20.00hz
+
+  Final estimate: cpd_inv=-2.05257  dist=2.3008m  SD=0.05949
+
+  Condition 7 of 11  (64%)
+  Elapsed: 28m 52s
+
+
+============================================================
+Condition 8/11
+  Color:rg  Speed:50px/s  Lum:50cd/m²  sf_cpp:0.2
+  cpd_inv range: [-2.4871, -3.3924]
+  MOA dist:1.990m  start_cpd_inv:-3.1063
+============================================================
+  Trial  1: dist=1.990m  cpd_inv=-3.1063  int=1  chosen=1  ok=True  est=-3.1646(2.106m)  step=0.00000  sf=29.973cpd  tf=10.00hz
+  Trial  2: dist=1.990m  cpd_inv=-3.1063  int=2  chosen=2  ok=True  est=-3.2160(2.212m)  step=0.00000  sf=29.973cpd  tf=10.00hz
+  Trial  3: dist=1.990m  cpd_inv=-3.1063  int=1  chosen=1  ok=True  est=-3.2580(2.300m)  step=0.00000  sf=29.973cpd  tf=10.00hz
+  Trial  4: dist=2.301m  cpd_inv=-3.2581  int=1  chosen=1  ok=True  est=-3.2998(2.391m)  step=0.15184  sf=34.587cpd  tf=10.00hz
+  Trial  5: dist=2.301m  cpd_inv=-3.2581  int=1  chosen=1  ok=True  est=-3.3350(2.469m)  step=0.15184  sf=34.587cpd  tf=10.00hz
+  Trial  6: dist=2.301m  cpd_inv=-3.2581  int=1  chosen=2  ok=False  est=-3.1858(2.149m)  step=0.15184  sf=34.587cpd  tf=10.00hz
+  Trial  7: dist=2.162m  cpd_inv=-3.1923  int=2  chosen=2  ok=True  est=-3.2213(2.222m)  step=0.06580  sf=32.533cpd  tf=10.00hz
+  Trial  8: dist=2.162m  cpd_inv=-3.1923  int=1  chosen=1  ok=True  est=-3.2519(2.287m)  step=0.06580  sf=32.533cpd  tf=10.00hz
+  Trial  9: dist=2.162m  cpd_inv=-3.1923  int=2  chosen=2  ok=True  est=-3.2775(2.342m)  step=0.06580  sf=32.533cpd  tf=10.00hz
+  Trial 10: dist=2.341m  cpd_inv=-3.2767  int=1  chosen=1  ok=True  est=-3.3012(2.394m)  step=0.08437  sf=35.182cpd  tf=10.00hz
+  Trial 11: dist=2.341m  cpd_inv=-3.2767  int=1  chosen=1  ok=True  est=-3.3223(2.441m)  step=0.08437  sf=35.182cpd  tf=10.00hz
+  Trial 12: dist=2.341m  cpd_inv=-3.2767  int=1  chosen=1  ok=True  est=-3.3409(2.482m)  step=0.08437  sf=35.182cpd  tf=10.00hz
+  Trial 13: dist=2.463m  cpd_inv=-3.3323  int=1  chosen=1  ok=True  est=-3.3590(2.523m)  step=0.05562  sf=37.004cpd  tf=10.00hz
+  Trial 14: dist=2.463m  cpd_inv=-3.3323  int=2  chosen=2  ok=True  est=-3.3758(2.562m)  step=0.05562  sf=37.004cpd  tf=10.00hz
+  Trial 15: dist=2.463m  cpd_inv=-3.3323  int=2  chosen=1  ok=False  est=-3.3133(2.421m)  step=0.05562  sf=37.004cpd  tf=10.00hz
+  Trial 16: dist=2.417m  cpd_inv=-3.3117  int=2  chosen=2  ok=True  est=-3.3279(2.453m)  step=0.02062  sf=36.321cpd  tf=10.00hz
+  Trial 17: dist=2.417m  cpd_inv=-3.3117  int=1  chosen=1  ok=True  est=-3.3415(2.484m)  step=0.02062  sf=36.321cpd  tf=10.00hz
+  Trial 18: dist=2.417m  cpd_inv=-3.3117  int=1  chosen=1  ok=True  est=-3.3540(2.512m)  step=0.02062  sf=36.321cpd  tf=10.00hz
+  Trial 19: dist=2.498m  cpd_inv=-3.3479  int=1  chosen=2  ok=False  est=-3.3145(2.423m)  step=0.03623  sf=37.526cpd  tf=10.00hz
+  Trial 20: dist=2.498m  cpd_inv=-3.3479  int=2  chosen=1  ok=False  est=-3.2855(2.360m)  step=0.03623  sf=37.526cpd  tf=10.00hz
+  Trial 21: dist=2.498m  cpd_inv=-3.3479  int=2  chosen=1  ok=False  est=-3.2612(2.307m)  step=0.03623  sf=37.526cpd  tf=10.00hz
+  Trial 22: dist=2.323m  cpd_inv=-3.2685  int=1  chosen=1  ok=True  est=-3.2738(2.334m)  step=0.07941  sf=34.919cpd  tf=10.00hz
+  Trial 23: dist=2.323m  cpd_inv=-3.2685  int=1  chosen=1  ok=True  est=-3.2850(2.359m)  step=0.07941  sf=34.919cpd  tf=10.00hz
+  Trial 24: dist=2.323m  cpd_inv=-3.2685  int=2  chosen=2  ok=True  est=-3.2949(2.380m)  step=0.07941  sf=34.919cpd  tf=10.00hz
+  Trial 25: dist=2.386m  cpd_inv=-3.2976  int=2  chosen=2  ok=True  est=-3.3038(2.400m)  step=0.02905  sf=35.858cpd  tf=10.00hz
+  Trial 26: dist=2.386m  cpd_inv=-3.2976  int=2  chosen=1  ok=False  est=-3.2770(2.341m)  step=0.02905  sf=35.858cpd  tf=10.00hz
+  Trial 27: dist=2.386m  cpd_inv=-3.2976  int=2  chosen=2  ok=True  est=-3.2860(2.361m)  step=0.02905  sf=35.858cpd  tf=10.00hz
+  Trial 28: dist=2.368m  cpd_inv=-3.2892  int=2  chosen=1  ok=False  est=-3.2602(2.305m)  step=0.00837  sf=35.586cpd  tf=10.00hz
+  Trial 29: dist=2.368m  cpd_inv=-3.2892  int=2  chosen=2  ok=True  est=-3.2694(2.325m)  step=0.00837  sf=35.586cpd  tf=10.00hz
+  Trial 30: dist=2.368m  cpd_inv=-3.2892  int=2  chosen=1  ok=False  est=-3.2457(2.274m)  step=0.00837  sf=35.586cpd  tf=10.00hz
+
+  Final estimate: cpd_inv=-3.24567  dist=2.2740m  SD=0.08765
+
+  Condition 8 of 11  (73%)
+  Elapsed: 31m 25s
+
+
+============================================================
+Condition 9/11
+  Color:ach  Speed:120px/s  Lum:50cd/m²  sf_cpp:0.25
+  cpd_inv range: [-2.6792, -3.6543]
+  MOA dist:1.260m  start_cpd_inv:-2.8838
+============================================================
+  Trial  1: dist=1.260m  cpd_inv=-2.8838  int=1  chosen=1  ok=True  est=-2.9470(1.348m)  step=0.00000  sf=23.982cpd  tf=30.00hz
+  Trial  2: dist=1.260m  cpd_inv=-2.8838  int=2  chosen=2  ok=True  est=-3.0023(1.428m)  step=0.00000  sf=23.982cpd  tf=30.00hz
+  Trial  3: dist=1.260m  cpd_inv=-2.8838  int=2  chosen=2  ok=True  est=-3.0470(1.494m)  step=0.00000  sf=23.982cpd  tf=30.00hz
+  Trial  4: dist=1.493m  cpd_inv=-3.0462  int=1  chosen=1  ok=True  est=-3.0917(1.563m)  step=0.16245  sf=28.267cpd  tf=30.00hz
+  Trial  5: dist=1.493m  cpd_inv=-3.0462  int=2  chosen=2  ok=True  est=-3.1291(1.621m)  step=0.16245  sf=28.267cpd  tf=30.00hz
+  Trial  6: dist=1.493m  cpd_inv=-3.0462  int=2  chosen=2  ok=True  est=-3.1591(1.669m)  step=0.16245  sf=28.267cpd  tf=30.00hz
+  Trial  7: dist=1.680m  cpd_inv=-3.1654  int=1  chosen=1  ok=True  est=-3.1870(1.715m)  step=0.11917  sf=31.716cpd  tf=30.00hz
+  Trial  8: dist=1.680m  cpd_inv=-3.1654  int=2  chosen=2  ok=True  est=-3.2110(1.755m)  step=0.11917  sf=31.716cpd  tf=30.00hz
+  Trial  9: dist=1.680m  cpd_inv=-3.1654  int=2  chosen=2  ok=True  est=-3.2310(1.788m)  step=0.11917  sf=31.716cpd  tf=30.00hz
+  Trial 10: dist=1.806m  cpd_inv=-3.2413  int=2  chosen=1  ok=False  est=-3.1789(1.702m)  step=0.07587  sf=34.052cpd  tf=30.00hz
+  Trial 11: dist=1.806m  cpd_inv=-3.2413  int=1  chosen=1  ok=True  est=-3.1981(1.733m)  step=0.07587  sf=34.052cpd  tf=30.00hz
+  Trial 12: dist=1.806m  cpd_inv=-3.2413  int=1  chosen=2  ok=False  est=-3.1526(1.659m)  step=0.07587  sf=34.052cpd  tf=30.00hz
+  Trial 13: dist=1.670m  cpd_inv=-3.1595  int=2  chosen=2  ok=True  est=-3.1731(1.692m)  step=0.08172  sf=31.540cpd  tf=30.00hz
+  Trial 14: dist=1.670m  cpd_inv=-3.1595  int=1  chosen=1  ok=True  est=-3.1911(1.722m)  step=0.08172  sf=31.540cpd  tf=30.00hz
+  Trial 15: dist=1.670m  cpd_inv=-3.1595  int=1  chosen=1  ok=True  est=-3.2068(1.748m)  step=0.08172  sf=31.540cpd  tf=30.00hz
+  Trial 16: dist=1.755m  cpd_inv=-3.2109  int=2  chosen=2  ok=True  est=-3.2205(1.771m)  step=0.05139  sf=33.105cpd  tf=30.00hz
+  Trial 17: dist=1.755m  cpd_inv=-3.2109  int=1  chosen=1  ok=True  est=-3.2329(1.792m)  step=0.05139  sf=33.105cpd  tf=30.00hz
+  Trial 18: dist=1.755m  cpd_inv=-3.2109  int=2  chosen=1  ok=False  est=-3.1930(1.725m)  step=0.05139  sf=33.105cpd  tf=30.00hz
+  Trial 19: dist=1.732m  cpd_inv=-3.1971  int=1  chosen=1  ok=True  est=-3.2058(1.746m)  step=0.01377  sf=32.681cpd  tf=30.00hz
+  Trial 20: dist=1.732m  cpd_inv=-3.1971  int=2  chosen=1  ok=False  est=-3.1662(1.681m)  step=0.01377  sf=32.681cpd  tf=30.00hz
+  Trial 21: dist=1.732m  cpd_inv=-3.1971  int=2  chosen=2  ok=True  est=-3.1791(1.702m)  step=0.01377  sf=32.681cpd  tf=30.00hz
+  Trial 22: dist=1.709m  cpd_inv=-3.1837  int=1  chosen=2  ok=False  est=-3.1424(1.642m)  step=0.01348  sf=32.269cpd  tf=30.00hz
+  Trial 23: dist=1.709m  cpd_inv=-3.1837  int=1  chosen=2  ok=False  est=-3.1093(1.590m)  step=0.01348  sf=32.269cpd  tf=30.00hz
+  Trial 24: dist=1.709m  cpd_inv=-3.1837  int=2  chosen=2  ok=True  est=-3.1232(1.612m)  step=0.01348  sf=32.269cpd  tf=30.00hz
+  Trial 25: dist=1.626m  cpd_inv=-3.1319  int=2  chosen=2  ok=True  est=-3.1371(1.634m)  step=0.05179  sf=30.720cpd  tf=30.00hz
+  Trial 26: dist=1.626m  cpd_inv=-3.1319  int=1  chosen=1  ok=True  est=-3.1494(1.654m)  step=0.05179  sf=30.720cpd  tf=30.00hz
+  Trial 27: dist=1.626m  cpd_inv=-3.1319  int=1  chosen=1  ok=True  est=-3.1602(1.671m)  step=0.05179  sf=30.720cpd  tf=30.00hz
+  Trial 28: dist=1.678m  cpd_inv=-3.1645  int=1  chosen=1  ok=True  est=-3.1697(1.687m)  step=0.03262  sf=31.690cpd  tf=30.00hz
+  Trial 29: dist=1.678m  cpd_inv=-3.1645  int=2  chosen=2  ok=True  est=-3.1784(1.701m)  step=0.03262  sf=31.690cpd  tf=30.00hz
+  Trial 30: dist=1.678m  cpd_inv=-3.1645  int=1  chosen=1  ok=True  est=-3.1862(1.714m)  step=0.03262  sf=31.690cpd  tf=30.00hz
+
+  Final estimate: cpd_inv=-3.18624  dist=1.7137m  SD=0.07022
+
+  Condition 9 of 11  (82%)
+  Elapsed: 34m 09s
+
+
+============================================================
+Condition 10/11
+  Color:rg  Speed:100px/s  Lum:50cd/m²  sf_cpp:0.2
+  cpd_inv range: [-2.4871, -3.3924]
+  MOA dist:1.700m  start_cpd_inv:-2.9501
+============================================================
+  Trial  1: dist=1.700m  cpd_inv=-2.9501  int=1  chosen=1  ok=True  est=-3.0084(1.805m)  step=0.00000  sf=25.675cpd  tf=20.00hz
+  Trial  2: dist=1.700m  cpd_inv=-2.9501  int=1  chosen=1  ok=True  est=-3.0598(1.901m)  step=0.00000  sf=25.675cpd  tf=20.00hz
+  Trial  3: dist=1.700m  cpd_inv=-2.9501  int=2  chosen=2  ok=True  est=-3.1018(1.981m)  step=0.00000  sf=25.675cpd  tf=20.00hz
+  Trial  4: dist=1.981m  cpd_inv=-3.1019  int=2  chosen=2  ok=True  est=-3.1436(2.064m)  step=0.15184  sf=29.847cpd  tf=20.00hz
+  Trial  5: dist=1.981m  cpd_inv=-3.1019  int=1  chosen=2  ok=False  est=-2.9934(1.777m)  step=0.15184  sf=29.847cpd  tf=20.00hz
+  Trial  6: dist=1.981m  cpd_inv=-3.1019  int=2  chosen=2  ok=True  est=-3.0296(1.844m)  step=0.15184  sf=29.847cpd  tf=20.00hz
+  Trial  7: dist=1.856m  cpd_inv=-3.0361  int=2  chosen=2  ok=True  est=-3.0651(1.911m)  step=0.06580  sf=27.987cpd  tf=20.00hz
+  Trial  8: dist=1.856m  cpd_inv=-3.0361  int=1  chosen=1  ok=True  est=-3.0957(1.969m)  step=0.06580  sf=27.987cpd  tf=20.00hz
+  Trial  9: dist=1.856m  cpd_inv=-3.0361  int=1  chosen=1  ok=True  est=-3.1213(2.019m)  step=0.06580  sf=27.987cpd  tf=20.00hz
+  Trial 10: dist=2.018m  cpd_inv=-3.1205  int=2  chosen=2  ok=True  est=-3.1450(2.066m)  step=0.08437  sf=30.386cpd  tf=20.00hz
+  Trial 11: dist=2.018m  cpd_inv=-3.1205  int=2  chosen=1  ok=False  est=-3.0659(1.912m)  step=0.08437  sf=30.386cpd  tf=20.00hz
+  Trial 12: dist=2.018m  cpd_inv=-3.1205  int=2  chosen=2  ok=True  est=-3.0870(1.953m)  step=0.08437  sf=30.386cpd  tf=20.00hz
+  Trial 13: dist=1.967m  cpd_inv=-3.0944  int=1  chosen=1  ok=True  est=-3.1068(1.991m)  step=0.02610  sf=29.630cpd  tf=20.00hz
+  Trial 14: dist=1.967m  cpd_inv=-3.0944  int=1  chosen=1  ok=True  est=-3.1241(2.025m)  step=0.02610  sf=29.630cpd  tf=20.00hz
+  Trial 15: dist=1.967m  cpd_inv=-3.0944  int=1  chosen=1  ok=True  est=-3.1392(2.055m)  step=0.02610  sf=29.630cpd  tf=20.00hz
+  Trial 16: dist=2.052m  cpd_inv=-3.1380  int=1  chosen=2  ok=False  est=-3.0951(1.968m)  step=0.04358  sf=30.900cpd  tf=20.00hz
+  Trial 17: dist=2.052m  cpd_inv=-3.1380  int=2  chosen=2  ok=True  est=-3.1088(1.995m)  step=0.04358  sf=30.900cpd  tf=20.00hz
+  Trial 18: dist=2.052m  cpd_inv=-3.1380  int=1  chosen=1  ok=True  est=-3.1216(2.020m)  step=0.04358  sf=30.900cpd  tf=20.00hz
+  Trial 19: dist=2.026m  cpd_inv=-3.1246  int=1  chosen=1  ok=True  est=-3.1334(2.043m)  step=0.01343  sf=30.504cpd  tf=20.00hz
+  Trial 20: dist=2.026m  cpd_inv=-3.1246  int=2  chosen=2  ok=True  est=-3.1442(2.065m)  step=0.01343  sf=30.504cpd  tf=20.00hz
+  Trial 21: dist=2.026m  cpd_inv=-3.1246  int=2  chosen=1  ok=False  est=-3.1081(1.994m)  step=0.01343  sf=30.504cpd  tf=20.00hz
+  Trial 22: dist=2.003m  cpd_inv=-3.1129  int=1  chosen=1  ok=True  est=-3.1188(2.014m)  step=0.01168  sf=30.164cpd  tf=20.00hz
+  Trial 23: dist=2.003m  cpd_inv=-3.1129  int=2  chosen=2  ok=True  est=-3.1284(2.033m)  step=0.01168  sf=30.164cpd  tf=20.00hz
+  Trial 24: dist=2.003m  cpd_inv=-3.1129  int=1  chosen=1  ok=True  est=-3.1371(2.051m)  step=0.01168  sf=30.164cpd  tf=20.00hz
+  Trial 25: dist=2.052m  cpd_inv=-3.1380  int=2  chosen=2  ok=True  est=-3.1450(2.066m)  step=0.02515  sf=30.901cpd  tf=20.00hz
+  Trial 26: dist=2.052m  cpd_inv=-3.1380  int=2  chosen=2  ok=True  est=-3.1525(2.081m)  step=0.02515  sf=30.901cpd  tf=20.00hz
+  Trial 27: dist=2.052m  cpd_inv=-3.1380  int=1  chosen=1  ok=True  est=-3.1595(2.096m)  step=0.02515  sf=30.901cpd  tf=20.00hz
+  Trial 28: dist=2.093m  cpd_inv=-3.1583  int=1  chosen=1  ok=True  est=-3.1662(2.109m)  step=0.02032  sf=31.505cpd  tf=20.00hz
+  Trial 29: dist=2.093m  cpd_inv=-3.1583  int=2  chosen=2  ok=True  est=-3.1726(2.122m)  step=0.02032  sf=31.505cpd  tf=20.00hz
+  Trial 30: dist=2.093m  cpd_inv=-3.1583  int=2  chosen=2  ok=True  est=-3.1788(2.135m)  step=0.02032  sf=31.505cpd  tf=20.00hz
+
+  Final estimate: cpd_inv=-3.17876  dist=2.1346m  SD=0.06196
+
+  Condition 10 of 11  (91%)
+  Elapsed: 36m 31s
+
+
+============================================================
+Condition 11/11
+  Color:ach  Speed:60px/s  Lum:50cd/m²  sf_cpp:0.25
+  cpd_inv range: [-2.6792, -3.6543]
+  MOA dist:1.910m  start_cpd_inv:-3.3014
+============================================================
+  Trial  1: dist=1.910m  cpd_inv=-3.3014  int=2  chosen=2  ok=True  est=-3.3646(2.024m)  step=0.00000  sf=35.983cpd  tf=15.00hz
+  Trial  2: dist=1.910m  cpd_inv=-3.3014  int=1  chosen=1  ok=True  est=-3.4199(2.127m)  step=0.00000  sf=35.983cpd  tf=15.00hz
+  Trial  3: dist=1.910m  cpd_inv=-3.3014  int=2  chosen=2  ok=True  est=-3.4647(2.212m)  step=0.00000  sf=35.983cpd  tf=15.00hz
+  Trial  4: dist=2.211m  cpd_inv=-3.4639  int=1  chosen=1  ok=True  est=-3.5093(2.300m)  step=0.16245  sf=41.560cpd  tf=15.00hz
+  Trial  5: dist=2.211m  cpd_inv=-3.4639  int=2  chosen=2  ok=True  est=-3.5468(2.375m)  step=0.16245  sf=41.560cpd  tf=15.00hz
+  Trial  6: dist=2.211m  cpd_inv=-3.4639  int=1  chosen=1  ok=True  est=-3.5768(2.436m)  step=0.16245  sf=41.560cpd  tf=15.00hz
+  Trial  7: dist=2.449m  cpd_inv=-3.5830  int=2  chosen=2  ok=True  est=-3.6047(2.494m)  step=0.11917  sf=45.999cpd  tf=15.00hz
+  Trial  8: dist=2.449m  cpd_inv=-3.5830  int=1  chosen=2  ok=False  est=-3.5114(2.304m)  step=0.11917  sf=45.999cpd  tf=15.00hz
+  Trial  9: dist=2.449m  cpd_inv=-3.5830  int=2  chosen=1  ok=False  est=-3.4473(2.179m)  step=0.11917  sf=45.999cpd  tf=15.00hz
+  Trial 10: dist=2.205m  cpd_inv=-3.4610  int=2  chosen=2  ok=True  est=-3.4762(2.235m)  step=0.12203  sf=41.458cpd  tf=15.00hz
+  Trial 11: dist=2.205m  cpd_inv=-3.4610  int=1  chosen=1  ok=True  est=-3.5010(2.283m)  step=0.12203  sf=41.458cpd  tf=15.00hz
+  Trial 12: dist=2.205m  cpd_inv=-3.4610  int=2  chosen=2  ok=True  est=-3.5217(2.324m)  step=0.12203  sf=41.458cpd  tf=15.00hz
+  Trial 13: dist=2.335m  cpd_inv=-3.5269  int=2  chosen=2  ok=True  est=-3.5398(2.361m)  step=0.06594  sf=43.873cpd  tf=15.00hz
+  Trial 14: dist=2.335m  cpd_inv=-3.5269  int=1  chosen=1  ok=True  est=-3.5559(2.394m)  step=0.06594  sf=43.873cpd  tf=15.00hz
+  Trial 15: dist=2.335m  cpd_inv=-3.5269  int=1  chosen=2  ok=False  est=-3.5022(2.286m)  step=0.06594  sf=43.873cpd  tf=15.00hz
+  Trial 16: dist=2.301m  cpd_inv=-3.5097  int=1  chosen=1  ok=True  est=-3.5184(2.318m)  step=0.01721  sf=43.233cpd  tf=15.00hz
+  Trial 17: dist=2.301m  cpd_inv=-3.5097  int=1  chosen=1  ok=True  est=-3.5326(2.346m)  step=0.01721  sf=43.233cpd  tf=15.00hz
+  Trial 18: dist=2.301m  cpd_inv=-3.5097  int=2  chosen=2  ok=True  est=-3.5452(2.372m)  step=0.01721  sf=43.233cpd  tf=15.00hz
+  Trial 19: dist=2.376m  cpd_inv=-3.5472  int=2  chosen=2  ok=True  est=-3.5565(2.395m)  step=0.03750  sf=44.634cpd  tf=15.00hz
+  Trial 20: dist=2.376m  cpd_inv=-3.5472  int=2  chosen=1  ok=False  est=-3.5228(2.327m)  step=0.03750  sf=44.634cpd  tf=15.00hz
+  Trial 21: dist=2.376m  cpd_inv=-3.5472  int=2  chosen=2  ok=True  est=-3.5338(2.349m)  step=0.03750  sf=44.634cpd  tf=15.00hz
+  Trial 22: dist=2.355m  cpd_inv=-3.5370  int=2  chosen=2  ok=True  est=-3.5440(2.369m)  step=0.01024  sf=44.249cpd  tf=15.00hz
+  Trial 23: dist=2.355m  cpd_inv=-3.5370  int=1  chosen=1  ok=True  est=-3.5533(2.388m)  step=0.01024  sf=44.249cpd  tf=15.00hz
+  Trial 24: dist=2.355m  cpd_inv=-3.5370  int=1  chosen=1  ok=True  est=-3.5619(2.406m)  step=0.01024  sf=44.249cpd  tf=15.00hz
+  Trial 25: dist=2.407m  cpd_inv=-3.5625  int=2  chosen=2  ok=True  est=-3.5698(2.422m)  step=0.02554  sf=45.214cpd  tf=15.00hz
+  Trial 26: dist=2.407m  cpd_inv=-3.5625  int=1  chosen=1  ok=True  est=-3.5771(2.437m)  step=0.02554  sf=45.214cpd  tf=15.00hz
+  Trial 27: dist=2.407m  cpd_inv=-3.5625  int=1  chosen=2  ok=False  est=-3.5533(2.388m)  step=0.02554  sf=45.214cpd  tf=15.00hz
+  Trial 28: dist=2.391m  cpd_inv=-3.5546  int=2  chosen=1  ok=False  est=-3.5304(2.342m)  step=0.00787  sf=44.915cpd  tf=15.00hz
+  Trial 29: dist=2.391m  cpd_inv=-3.5546  int=1  chosen=2  ok=False  est=-3.5090(2.299m)  step=0.00787  sf=44.915cpd  tf=15.00hz
+  Trial 30: dist=2.391m  cpd_inv=-3.5546  int=1  chosen=1  ok=True  est=-3.5174(2.316m)  step=0.00787  sf=44.915cpd  tf=15.00hz
+
+  Final estimate: cpd_inv=-3.51744  dist=2.3160m  SD=0.07727
+
+  Condition 11 of 11  (100%)
+  Elapsed: 39m 05s
+
+
+Experiment finished safely.
+
+Process finished with exit code 0

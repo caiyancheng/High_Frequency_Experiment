@@ -48,7 +48,7 @@ from control_display.control_display_main import rsbg_init, rsbg_update, rsbg_cl
 # 常量
 # ==========================================================
 
-INITIAL_DISTANCE = 0.5
+INITIAL_DISTANCE = 1
 UNIT_PER_M       = 100 / 1.6
 MIN_DIST         = 1
 MAX_DIST         = 2.6
@@ -121,6 +121,7 @@ def init_moa_csv(path: str):
             "repeat_index", "distance_m",
             "retinal_spatial_frequency_cpd", "temporal_frequency_hz",
             "theta_deg", "gabor_radius_px",
+            "sf_cpp_condition", "speed_px_per_sec_condition",
         ])
     return fh, w
 
@@ -158,15 +159,16 @@ def main():
     parser.add_argument("--name",                      default="YanchengCai")
     # parser.add_argument("--name", default="Rafal Mantiuk")
     parser.add_argument("--colors",      nargs="+",    default=["ach", "rg", "yv"])
-    parser.add_argument("--ach_speeds", nargs="+", type=float, default=[40, 80, 120, 180])
-    parser.add_argument("--rg_speeds", nargs="+", type=float, default=[50, 100, 150])
-    parser.add_argument("--yv_speeds", nargs="+", type=float, default=[200, 400])
-    parser.add_argument("--ach_luminance_list", nargs="+", type=float, default=[5])
-    parser.add_argument("--rg_luminance_list", nargs="+", type=float, default=[5])
-    parser.add_argument("--yv_luminance_list", nargs="+", type=float, default=[5])
-    parser.add_argument("--ach_spatial_frequency_cpp", type=float, default=0.25)
-    parser.add_argument("--rg_spatial_frequency_cpp", type=float, default=0.2)
-    parser.add_argument("--yv_spatial_frequency_cpp", type=float, default=0.05)
+    # parser.add_argument("--ach_speeds", nargs="+", type=float, default=[40, 80, 120, 180])
+    parser.add_argument("--ach_speeds", nargs="+", type=float, default=[150, 200, 300])
+    parser.add_argument("--rg_speeds", nargs="+", type=float, default=[100, 150])
+    parser.add_argument("--yv_speeds", nargs="+", type=float, default=[400, 500])
+    parser.add_argument("--ach_luminance_list", nargs="+", type=float, default=[1])
+    parser.add_argument("--rg_luminance_list", nargs="+", type=float, default=[1])
+    parser.add_argument("--yv_luminance_list", nargs="+", type=float, default=[1])
+    parser.add_argument("--ach_spatial_frequency_cpp", type=float, default=0.1)
+    parser.add_argument("--rg_spatial_frequency_cpp", type=float, default=0.1)
+    parser.add_argument("--yv_spatial_frequency_cpp", type=float, default=0.02)
     parser.add_argument("--ach_contrast",              type=float, default=0.9)
     parser.add_argument("--rg_contrast",               type=float, default=0.14)
     parser.add_argument("--yv_contrast",               type=float, default=0.92)
@@ -198,6 +200,37 @@ def main():
                         sf_cpp=getattr(args, f"{color}_spatial_frequency_cpp"), rep=rep,
                     ))
     random.shuffle(conditions)
+
+    # ==========================================================
+    # 启动时打印各通道空间频率范围
+    # ==========================================================
+    def _print_cpd_ranges():
+        import math
+        glfw.init()
+        monitors = glfw.get_monitors()
+        mon = monitors[args.monitor_index] if args.monitor_index < len(monitors) else monitors[0]
+        mode = glfw.get_video_mode(mon)
+        res_x, res_y = mode.size.width, mode.size.height
+        diag_px = math.sqrt(res_x ** 2 + res_y ** 2)
+        W = args.diagonal_inch * 0.0254 * (res_x / diag_px)  # 屏幕物理宽度 (m)
+        ppd_per_meter = (math.pi / 180) * (res_x / W)  # PPD / 距离(m)
+
+        print("\n" + "=" * 62)
+        print(f"  空间频率范围预览  ({res_x}×{res_y}, {args.diagonal_inch}\" 屏)")
+        print(f"  观察距离范围: {MIN_DIST} m ~ {MAX_DIST} m")
+        print("-" * 62)
+        print(f"  {'通道':<6} {'sf_cpp':>8}  {'近端(cpd)':>10}  {'远端(cpd)':>10}  {'范围':>22}")
+        print("-" * 62)
+        for color in args.colors:
+            sf_cpp = getattr(args, f"{color}_spatial_frequency_cpp")
+            cpd_near = sf_cpp * ppd_per_meter * MIN_DIST
+            cpd_far = sf_cpp * ppd_per_meter * MAX_DIST
+            print(f"  {color:<6} {sf_cpp:>8.3f}  {cpd_near:>10.3f}  {cpd_far:>10.3f}"
+                  f"  [{cpd_near:.3f}, {cpd_far:.3f}] cpd")
+        print("=" * 62 + "\n")
+
+    _print_cpd_ranges()
+    # ==========================================================
 
     fh, writer = init_moa_csv(MOA_CSV)
     completed  = load_completed_conditions(MOA_CSV, args.name)
@@ -249,7 +282,7 @@ def main():
 
 
             # 随机起点消除锚定偏差
-            current_dist       = float(np.random.uniform(MIN_DIST, MAX_DIST))
+            current_dist       = 1.1 #float(np.random.uniform(MIN_DIST, MAX_DIST))
             last_platform_dist = None   # 强制第一帧就发送指令
 
             print(f"\n{'='*60}")
@@ -388,6 +421,7 @@ def main():
                 rep, round(current_dist, 4),
                 round(rho_cpd, 4), round(omega, 4),
                 round(float(np.rad2deg(theta)), 4), round(radius_px, 2),
+                sf_cpp, speed,
             ])
             fh.flush()
 

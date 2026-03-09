@@ -121,6 +121,7 @@ def init_moa_csv(path: str):
             "repeat_index", "distance_m",
             "retinal_spatial_frequency_cpd", "temporal_frequency_hz",
             "theta_deg", "gabor_radius_px",
+            "sf_cpp_condition", "speed_px_per_sec_condition",
         ])
     return fh, w
 
@@ -158,15 +159,17 @@ def main():
     parser.add_argument("--name",                      default="YanchengCai")
     # parser.add_argument("--name", default="Rafal Mantiuk")
     parser.add_argument("--colors",      nargs="+",    default=["ach", "rg", "yv"])
-    parser.add_argument("--ach_speeds", nargs="+", type=float, default=[40, 80, 120, 180])
-    parser.add_argument("--rg_speeds", nargs="+", type=float, default=[50, 100, 150, 225])
-    parser.add_argument("--yv_speeds", nargs="+", type=float, default=[100, 200, 300, 450])
+    # 10, 15, 20, 30, 45
+    parser.add_argument("--ach_speeds", nargs="+", type=float, default=[40, 60, 80, 120, 180])
+    parser.add_argument("--rg_speeds", nargs="+", type=float, default=[50, 75, 100, 150])
+    parser.add_argument("--yv_speeds", nargs="+", type=float, default=[400, 600])
     parser.add_argument("--ach_luminance_list", nargs="+", type=float, default=[50])
     parser.add_argument("--rg_luminance_list", nargs="+", type=float, default=[50])
     parser.add_argument("--yv_luminance_list", nargs="+", type=float, default=[50])
     parser.add_argument("--ach_spatial_frequency_cpp", type=float, default=0.25)
     parser.add_argument("--rg_spatial_frequency_cpp", type=float, default=0.2)
-    parser.add_argument("--yv_spatial_frequency_cpp", type=float, default=0.1)
+    parser.add_argument("--yv_spatial_frequency_cpp", type=float, default=0.05)
+
     parser.add_argument("--ach_contrast",              type=float, default=0.9)
     parser.add_argument("--rg_contrast",               type=float, default=0.14)
     parser.add_argument("--yv_contrast",               type=float, default=0.92)
@@ -280,7 +283,8 @@ def main():
 
 
             # 随机起点消除锚定偏差
-            current_dist       = float(np.random.uniform(MIN_DIST, MAX_DIST))
+            # current_dist       = float(np.random.uniform(MIN_DIST, MAX_DIST))
+            current_dist = 1.1
             last_platform_dist = None   # 强制第一帧就发送指令
 
             print(f"\n{'='*60}")
@@ -419,6 +423,7 @@ def main():
                 rep, round(current_dist, 4),
                 round(rho_cpd, 4), round(omega, 4),
                 round(float(np.rad2deg(theta)), 4), round(radius_px, 2),
+                sf_cpp, speed,
             ])
             fh.flush()
 

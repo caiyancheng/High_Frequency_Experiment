@@ -395,7 +395,7 @@ if __name__ == "__main__":
 
     parser.add_argument("--contrast", type=float, default=0.15)
     parser.add_argument("--spatial_freq_cpp", type=float, default=0.1)
-    parser.add_argument("--speed_px_per_sec", type=float, default=400.0)
+    parser.add_argument("--speed_px_per_sec", type=float, default=100.0)
     parser.add_argument("--visual_radius_deg", type=float, default=5.0)
     parser.add_argument("--mean_luminance", type=float, default=100.0)
     parser.add_argument("--peak_luminance", type=float, default=400.0)
