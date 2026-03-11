@@ -195,9 +195,9 @@ def load_completed_conditions(name, csv_path=QUEST_CSV):
 
 def main():
     parser = argparse.ArgumentParser()
-    # parser.add_argument("--name", default='YanchengCai')
+    parser.add_argument("--name", default='YanchengCai')
     # parser.add_argument("--name", default='Rafal Mantiuk')
-    parser.add_argument("--name", default='YifanDing')
+    # parser.add_argument("--name", default='YifanDing')
     parser.add_argument("--colors", nargs="+", default=["ach", "rg", "yv"])
     # 10, 15, 20, 30, 45
     parser.add_argument("--ach_speeds", nargs="+", type=float, default=[40, 60, 80, 120, 180])
