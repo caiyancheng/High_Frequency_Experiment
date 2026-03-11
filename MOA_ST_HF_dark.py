@@ -156,7 +156,8 @@ def load_completed_conditions(path: str, name: str) -> set:
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--name",                      default="YanchengCai")
+    # parser.add_argument("--name",                      default="YanchengCai")
+    parser.add_argument("--name", default='YifanDing')
     # parser.add_argument("--name", default="Rafal Mantiuk")
     parser.add_argument("--colors",      nargs="+",    default=["ach", "rg", "yv"])
     # parser.add_argument("--ach_speeds", nargs="+", type=float, default=[40, 80, 120, 180])
