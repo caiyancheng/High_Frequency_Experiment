@@ -29,7 +29,7 @@ import glfw
 from OpenGL.GL import *
 from OpenGL.GL.shaders import compileProgram, compileShader
 from scipy.interpolate import PchipInterpolator
-
+import os
 
 # ==========================================================
 # Physical / display helpers  (re-exported for convenience)
@@ -206,6 +206,7 @@ uniform mat3 M_dkl2rgb;
 uniform float L_min, L_max;
 uniform int   lut_size;
 uniform samplerBuffer lut_tex;
+uniform float dir_x, dir_y;
 const float PI = 3.141592653589793;
 
 float lut_lookup(float L){
@@ -217,7 +218,8 @@ void main(){
     float x=(fragCoord.x*.5+.5)*screen_width, y=(fragCoord.y*.5+.5)*screen_height;
     float dx=x-screen_width*.5, dy=y-screen_height*.5;
     float g=exp(-(dx*dx+dy*dy)/(2.*radius*radius));
-    float mod_val=g*cos(2.*PI*(spatial_freq*x-phase))*contrast*mean_lum;
+    float proj = dir_x * x + dir_y * y;
+    float mod_val=g*cos(2.*PI*(spatial_freq*proj-phase))*contrast*mean_lum;
     vec3 lin=M_dkl2rgb*(dkl_bg+mod_val*col_dir);
     if(min(lin.r,min(lin.g,lin.b))<0.){ FragColor=vec4(1,0,0,1); return; }
     FragColor=vec4(lut_lookup(lin.r),lut_lookup(lin.g),lut_lookup(lin.b),1.);
@@ -234,10 +236,20 @@ void main(){ FragColor=vec4(bg_color,1.); }
 _FS_DIGIT = """
 #version 330
 in vec2 fragCoord; out vec4 FragColor;
-uniform vec3 bg_color, fg_color;
+uniform vec3 fg_color;
 uniform int digit;
 uniform float cx_ndc, cy_ndc, char_size_ndc;
+uniform float mean_px;
+uniform float noise_seed;
+uniform float screen_width, screen_height;
+
 float box(vec2 p,vec2 b){ vec2 d=abs(p)-b; return length(max(d,0.))+min(max(d.x,d.y),0.); }
+
+float hash(vec2 p, float seed){
+    p = p * 500.0 + vec2(seed * 1.7391, seed * 3.1415);
+    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+}
+
 void main(){
     vec2 l=(fragCoord-vec2(cx_ndc,cy_ndc))/char_size_ndc; float m=0.,t=.18;
     if(digit==1){
@@ -250,7 +262,24 @@ void main(){
         if(box(l-vec2(-.32,-.22),vec2(t,.28))<0.)m=1.;
         if(box(l-vec2(0.,-.55),vec2(.38,t))<0.)m=1.;
     }
-    FragColor=m>.5?vec4(fg_color,1.):vec4(bg_color,1.);
+
+    float n = hash(fragCoord, noise_seed);
+    float bg_val = clamp(mean_px * (0.6 + n * 0.8), 0.0, 1.0);
+    vec3 bg_noise = vec3(bg_val);
+
+    vec2 px = vec2((fragCoord.x * 0.5 + 0.5) * screen_width,
+                   (fragCoord.y * 0.5 + 0.5) * screen_height);
+    vec2 center_px = vec2(screen_width * 0.5, screen_height * 0.5);
+    vec2 d = abs(px - center_px);
+    float cross_half_px = 20.0;
+    float cross_thick_px = 2.0;
+    bool on_cross = (d.x < cross_half_px && d.y < cross_thick_px) ||
+                    (d.y < cross_half_px && d.x < cross_thick_px);
+    if (on_cross) { FragColor = vec4(mean_px * 2.0, mean_px * 2.0, mean_px * 2.0, 1.0); return; }
+
+    if(m > 0.5){ FragColor = vec4(fg_color, 1.0); return; }
+
+    FragColor = vec4(bg_noise, 1.0);
 }
 """
 
@@ -261,12 +290,11 @@ uniform sampler2D tex;
 uniform float tex_x, tex_y, tex_w, tex_h;
 void main(){
     vec2 uv=fragCoord*.5+.5;
-    float u=(uv.x-(tex_x*.5+.5))/tex_w, v=(uv.y-(tex_y*.5+.5))/tex_h;
+    float u = (uv.x - (0.5 - tex_w * 0.5 + tex_x * 0.5)) / tex_w, v=(uv.y-(tex_y*.5+.5))/tex_h;
     if(u>=0.&&u<=1.&&v>=0.&&v<=1.) FragColor=texture(tex,vec2(u,1.-v));
     else discard;
 }
 """
-
 
 # ==========================================================
 # VAO helper
@@ -358,6 +386,7 @@ class ExperimentRenderer:
         self.window = self.width = self.height = self.refresh = self.W = None
         self._M_combined = self._dkl_bg = self._col_dir = self._mean_luminance = None
         self.background_size_deg = background_size_deg
+        self._gabor_direction = (1.0, 0.0)  # (dx, dy) unit vector
 
     def _bg_size_px(self, distance_m):
         half_rad = np.deg2rad(self.background_size_deg / 2.0)
@@ -426,25 +455,37 @@ class ExperimentRenderer:
         _quad(self._vao, self._bg_size_px(distance_m))
         glfw.swap_buffers(self.window)
 
-    def show_interval_cue(self, interval_number: int,  distance_m: float, duration: float = 0.5) -> bool:
-        """Show digit '1' or '2' for *duration* seconds. Returns True on ESC."""
+    def show_interval_cue(self, interval_number: int, distance_m: float, duration: float = 0.5) -> bool:
         t0 = time.perf_counter()
+        # 预计算 mean_luminance 对应的归一化 pixel 值
+        mean_lum = self._mean_luminance if self._mean_luminance is not None else 50.0
+        mean_px = float(np.interp(mean_lum, self._lut_L, self._lut_p))
+        frame = 0
         while time.perf_counter() - t0 < duration:
             glfw.poll_events()
             if glfw.get_key(self.window, glfw.KEY_ESCAPE) == glfw.PRESS:
                 return True
             sh = self._sh_digit
             glUseProgram(sh)
-            glUniform3f(self._loc(sh,"bg_color"), 0.15, 0.15, 0.15)
-            glUniform3f(self._loc(sh,"fg_color"), 0., 0., 0.)
-            glUniform1i(self._loc(sh,"digit"),         interval_number)
-            glUniform1f(self._loc(sh,"cx_ndc"),        0.)
-            glUniform1f(self._loc(sh,"cy_ndc"),        0.)
-            glUniform1f(self._loc(sh,"char_size_ndc"), 0.18)
+            glUniform1f(self._loc(sh, "screen_width"), float(self.width))
+            glUniform1f(self._loc(sh, "screen_height"), float(self.height))
+            glUniform3f(self._loc(sh, "fg_color"), 0., 0., 0.)
+            glUniform1i(self._loc(sh, "digit"), interval_number)
+            glUniform1f(self._loc(sh, "cx_ndc"), 0.)
+            glUniform1f(self._loc(sh, "cy_ndc"), 0.15)
+            glUniform1f(self._loc(sh, "char_size_ndc"), 0.18)
+            glUniform1f(self._loc(sh, "mean_px"), mean_px)  # 新增
+            glUniform1f(self._loc(sh, "noise_seed"), float(frame))  # 新增，每帧变化
             glClear(GL_COLOR_BUFFER_BIT)
             _quad(self._vao, self._bg_size_px(distance_m))
             glfw.swap_buffers(self.window)
+            frame += 1
         return False
+
+    def set_gabor_direction(self, direction: str):
+        """direction: 'right'|'left'|'up'|'down'"""
+        d = {'right': (1, 0), 'left': (-1, 0), 'up': (0, 1), 'down': (0, -1)}
+        self._gabor_direction = d[direction]
 
     def show_gabor(self, contrast: float, distance_m: float,
                    spatial_frequency_cpp: float, speed: float,
@@ -464,6 +505,7 @@ class ExperimentRenderer:
         """
         if self._M_combined is None:
             raise RuntimeError("Call set_condition() before show_gabor().")
+        dx, dy = self._gabor_direction
         sh = self._sh_gabor
         glUseProgram(sh)
         # 绑定 LUT TBO 到纹理单元 0
@@ -486,6 +528,8 @@ class ExperimentRenderer:
         glUniform1f(self._loc(sh,"radius"),
                     visual_radius_deg_to_px(self.visual_radius_deg,
                                             distance_m, self.W, self.width))
+        glUniform1f(self._loc(sh, "dir_x"), dx)
+        glUniform1f(self._loc(sh, "dir_y"), dy)
         phase      = 0.0
         phase_step = spatial_frequency_cpp * speed / self.refresh
         t0 = time.perf_counter()
@@ -503,7 +547,8 @@ class ExperimentRenderer:
             glfw.swap_buffers(self.window)
         return False
 
-    def draw_text_overlay(self, text, distance_m: float, y_ndc=-0.75, size_px=36, bg=(0.25, 0.25, 0.25)):
+    def draw_text_overlay(self, text, distance_m: float, y_ndc=-0.75, bg=(0.25, 0.25, 0.25)):
+        size_px = max(12, int(16 * distance_m))
         tex, tw, th = upload_text_texture(text, size_px=size_px)
         ndcw = tw / self.width * 2.0
         ndch = th / self.height * 2.0
@@ -512,6 +557,7 @@ class ExperimentRenderer:
         glActiveTexture(GL_TEXTURE1)  # ← 改为 TEXTURE1
         glBindTexture(GL_TEXTURE_2D, tex)
         glUniform1i(self._loc(sh, "tex"), 1)  # ← 对应改为 1
+        glUniform1f(self._loc(sh, "tex_x"), 0.0)
         glUniform1f(self._loc(sh, "tex_y"), y_ndc)
         glUniform1f(self._loc(sh, "tex_w"), ndcw)
         glUniform1f(self._loc(sh, "tex_h"), ndch)
@@ -522,13 +568,10 @@ class ExperimentRenderer:
         glDeleteTextures(1, [tex])
 
     def wait_for_response(self, distance_m: float):
-        """
-        Block until ← (→ interval 1) or → (→ interval 2) pressed.
-        Returns (interval_chosen: int | None, esc_pressed: bool).
-        """
         L1 = "Please choose:"
         L2 = "\u25c4  first signal"
         L3 = "\u25ba  second signal"
+        L4 = "\u25b2  replay"
         bg = (0.25, 0.25, 0.25)
         while True:
             glfw.poll_events()
@@ -536,16 +579,24 @@ class ExperimentRenderer:
                 return None, True
             for key, val in [(glfw.KEY_LEFT, 1), (glfw.KEY_RIGHT, 2)]:
                 if glfw.get_key(self.window, key) == glfw.PRESS:
+                    os.system("play -n synth 0.05 sine 1000 2>/dev/null &")  # ← 新增
                     while glfw.get_key(self.window, key) == glfw.PRESS:
                         glfw.poll_events()
                     return val, False
+            if glfw.get_key(self.window, glfw.KEY_UP) == glfw.PRESS:
+                os.system("play -n synth 0.05 sine 1000 2>/dev/null &")  # ← 新增
+                while glfw.get_key(self.window, glfw.KEY_UP) == glfw.PRESS:
+                    glfw.poll_events()
+                return 'repeat', False
             glUseProgram(self._sh_flat)
-            glUniform3f(self._loc(self._sh_flat,"bg_color"), *bg)
+            glUniform3f(self._loc(self._sh_flat, "bg_color"), *bg)
             glClear(GL_COLOR_BUFFER_BIT)
             _quad(self._vao, self._bg_size_px(distance_m))
-            self.draw_text_overlay(L1, distance_m, y_ndc= 0.05, size_px=8, bg=bg)
-            self.draw_text_overlay(L2, distance_m, y_ndc= 0.00, size_px=8, bg=bg)
-            self.draw_text_overlay(L3, distance_m, y_ndc= -0.05, size_px=8, bg=bg)
+            line_spacing = 0.08 * distance_m
+            self.draw_text_overlay(L1, distance_m, y_ndc=1.5 * line_spacing, bg=bg)
+            self.draw_text_overlay(L2, distance_m, y_ndc=0.5 * line_spacing, bg=bg)
+            self.draw_text_overlay(L3, distance_m, y_ndc=-0.5 * line_spacing, bg=bg)
+            self.draw_text_overlay(L4, distance_m, y_ndc=-1.5 * line_spacing, bg=bg)
             glfw.swap_buffers(self.window)
             time.sleep(0.005)
 
@@ -578,11 +629,12 @@ class ExperimentRenderer:
             fw = int(bfw * frac)
             if fw > 0:
                 glScissor(bx, by, fw, bh)
-                glUniform3f(self._loc(sh,"bg_color"), .1,.75,.25); _quad(self._vao, self._bg_size_px(distance_m))
+                glUniform3f(self._loc(sh,"bg_color"), .0,.25,.05); _quad(self._vao, self._bg_size_px(distance_m))
             glDisable(GL_SCISSOR_TEST)
-            self.draw_text_overlay(l1, distance_m, y_ndc=.05, size_px=8, bg=bg)
-            self.draw_text_overlay(l2, distance_m, y_ndc=0.0, size_px=8, bg=bg)
-            self.draw_text_overlay(l3, distance_m, y_ndc=-0.05, size_px=8, bg=bg)
+            line_spacing = 0.08 * distance_m
+            self.draw_text_overlay(l1, distance_m, y_ndc=line_spacing, bg=bg)
+            self.draw_text_overlay(l2, distance_m, y_ndc=0.0, bg=bg)
+            self.draw_text_overlay(l3, distance_m, y_ndc=-line_spacing, bg=bg)
             glfw.swap_buffers(self.window)
             time.sleep(1.0 / self.refresh)
         return False

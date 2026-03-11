@@ -153,7 +153,7 @@ def init_quest_csv(path):
     if empty:
         w.writerow([
             "name", "color", "speed_px_per_sec", "contrast", "mean_luminance",
-            "spatial_frequency_cpp", "sf_cpp_eff", "speed_eff", "diagonal_inch", "visual_radius_deg",
+            "spatial_frequency_cpp", "diagonal_inch", "visual_radius_deg",
             "trial_index", "distance_m_tested", "cpd_inv_tested",
             "test_interval", "observer_response", "correct",
             "quest_estimate_cpd_inv", "quest_estimate_m", "quest_sd_cpd_inv",
@@ -197,17 +197,17 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--name", default='YanchengCai')
     # parser.add_argument("--name", default='Rafal Mantiuk')
-    parser.add_argument("--colors", nargs="+", default=["ach", "rg", "yv"])
+    parser.add_argument("--colors",     nargs="+", default=["ach", "rg", "yv"])
     # 10, 15, 20, 30, 45
-    parser.add_argument("--ach_speeds", nargs="+", type=float, default=[40, 60, 80, 120, 180])
-    parser.add_argument("--rg_speeds", nargs="+", type=float, default=[50, 75, 100, 150])
-    parser.add_argument("--yv_speeds", nargs="+", type=float, default=[400, 600])
-    parser.add_argument("--ach_luminance_list", nargs="+", type=float, default=[50])
-    parser.add_argument("--rg_luminance_list", nargs="+", type=float, default=[50])
-    parser.add_argument("--yv_luminance_list", nargs="+", type=float, default=[50])
-    parser.add_argument("--ach_spatial_frequency_cpp", type=float, default=0.25)
-    parser.add_argument("--rg_spatial_frequency_cpp", type=float, default=0.2)
-    parser.add_argument("--yv_spatial_frequency_cpp", type=float, default=0.05)
+    parser.add_argument("--ach_speeds", nargs="+", type=float, default=[200, 300, 450])
+    parser.add_argument("--rg_speeds", nargs="+", type=float, default=[100, 150, 200])
+    parser.add_argument("--yv_speeds", nargs="+", type=float, default=[400, 500, 600])
+    parser.add_argument("--ach_luminance_list", nargs="+", type=float, default=[1])
+    parser.add_argument("--rg_luminance_list", nargs="+", type=float, default=[1])
+    parser.add_argument("--yv_luminance_list", nargs="+", type=float, default=[1])
+    parser.add_argument("--ach_spatial_frequency_cpp", type=float, default=0.1)
+    parser.add_argument("--rg_spatial_frequency_cpp", type=float, default=0.1)
+    parser.add_argument("--yv_spatial_frequency_cpp", type=float, default=0.02)
 
     parser.add_argument("--ach_contrast", type=float, default=0.9)
     parser.add_argument("--rg_contrast",  type=float, default=0.14)
@@ -257,7 +257,7 @@ def main():
         diagonal_inch=args.diagonal_inch,
         visual_radius_deg=args.visual_radius_deg,
         monitor_index=args.monitor_index,
-        lut_json_path="calibrate_display/Measure_specbos/pixel_luminance_model_pchip_B100_C100_s800.json"
+        lut_json_path="calibrate_display/Measure_specbos/pixel_luminance_model_pchip_B100_C100_s800_dark.json"
     )
     renderer.init_window()
 
@@ -307,77 +307,47 @@ def main():
             trial_idx    = 0
             dist         = start_dist   # fallback for progress screen
             cpd_inv_test = start_cpd_inv
-            sf_cpp_eff = sf_cpp
-            speed_eff = speed
-            renderer.set_condition(color, lum)
             for trial_idx in range(TRIALS_PER_CONDITION):
                 if trial_idx % REPEATS_PER_POSITION == 0:
                     # ---- Quest suggestion in cpd_inv space ----
                     cpd_inv_test = quest_suggest_cpd_inv(quest, cpd_inv_range)
 
                     # Convergence check in cpd_inv space
-                    # if prev_cpd_inv is not None:
-                    #     step = abs(cpd_inv_test - prev_cpd_inv)
-                    #     last_step = step
-                    #     if step < QUEST_CONVERGE_THRESH:
-                    #         print(f"  [CONVERGE] step={step:.5f} at trial {trial_idx + 1}")
-                    #         converged = True
-                    #         break
-                    # prev_cpd_inv = cpd_inv_test
+                    if prev_cpd_inv is not None:
+                        step = abs(cpd_inv_test - prev_cpd_inv)
+                        last_step = step
+                        if step < QUEST_CONVERGE_THRESH:
+                            print(f"  [CONVERGE] step={step:.5f} at trial {trial_idx + 1}")
+                            converged = True
+                            break
+                    prev_cpd_inv = cpd_inv_test
 
-                    # # ---- cpd_inv → distance for platform ----
-                    # dist = float(np.clip(
-                    #     dist_from_cpd_inv(cpd_inv_test, sf_cpp, screen_width_px, screen_width_m),
-                    #     MIN_DIST, MAX_DIST))
-                    # --- boundary adaptation ---
-                    dist_raw = dist_from_cpd_inv(cpd_inv_test, sf_cpp_eff, screen_width_px, screen_width_m)
-
-                    if dist_raw >= MAX_DIST * 0.95:
-                        sf_cpp_eff *= 2
-                        speed_eff /= 2
-                        cpd_inv_range = cpd_inv_range_from_dist_range(
-                            MIN_DIST, MAX_DIST, sf_cpp_eff, screen_width_px, screen_width_m)
-                        current_est = quest_mean_cpd_inv(quest, cpd_inv_range)
-                        quest = make_quest(current_est, cpd_inv_range)
-                        cpd_inv_test = quest_suggest_cpd_inv(quest, cpd_inv_range)  # ← 加这行
-                        print(f"  [NEW RANGE] {cpd_inv_range[0]:.4f} ~ {cpd_inv_range[1]:.4f}")
-
-                    elif dist_raw <= MIN_DIST * 1.05:
-                        sf_cpp_eff /= 2
-                        speed_eff *= 2
-                        cpd_inv_range = cpd_inv_range_from_dist_range(
-                            MIN_DIST, MAX_DIST, sf_cpp_eff, screen_width_px, screen_width_m)
-                        current_est = quest_mean_cpd_inv(quest, cpd_inv_range)
-                        quest = make_quest(current_est, cpd_inv_range)
-                        cpd_inv_test = quest_suggest_cpd_inv(quest, cpd_inv_range)  # ← 加这行
-                        print(f"  [NEW RANGE] {cpd_inv_range[0]:.4f} ~ {cpd_inv_range[1]:.4f}")
-
-                    # 此时 cpd_inv_test 已是新范围内的合理值
-                    cpd = (-cpd_inv_test) ** 3
-                    ppd_eff = cpd / sf_cpp_eff
+                    # ---- cpd_inv → distance for platform ----
                     dist = float(np.clip(
-                        dist_from_ppd(ppd_eff, screen_width_px, screen_width_m),
+                        dist_from_cpd_inv(cpd_inv_test, sf_cpp, screen_width_px, screen_width_m),
                         MIN_DIST, MAX_DIST))
-                    platform.move_to(dist)
 
                 test_interval = interval_seq[seq_idx % len(interval_seq)]
                 seq_idx += 1
 
+                # ---- Move platform & set colour ----
+                if trial_idx % REPEATS_PER_POSITION == 0:
+                    platform.move_to(dist)
+                renderer.set_condition(color, lum)
 
-                renderer.set_gabor_direction(random.choice(['right', 'left', 'up', 'down']))
                 # ---- 2AFC trial (1 s per interval) ----
                 while True:
                     if renderer.show_interval_cue(1, dist): aborted = True; break
                     c1 = contrast if test_interval == 1 else 0.0
-                    if renderer.show_gabor(c1, dist, sf_cpp_eff, speed_eff, args.duration):
+                    if renderer.show_gabor(c1, dist, sf_cpp, speed, args.duration):
                         aborted = True
                         break
                     renderer.show_flat(dist, (0.2, 0.2, 0.2))
                     time.sleep(0.3)
                     if renderer.show_interval_cue(2, dist): aborted = True; break
                     c2 = contrast if test_interval == 2 else 0.0
-                    if renderer.show_gabor(c2, dist, sf_cpp_eff, speed_eff, args.duration):
-                        aborted = True
+                    if renderer.show_gabor(c2, dist, sf_cpp, speed, args.duration):
+                        aborted = True;
                         break
                     renderer.show_flat(dist, (0.2, 0.2, 0.2))
 
@@ -387,8 +357,7 @@ def main():
                     if chosen == 'repeat':  # 上键返回 'repeat'
                         continue
                     break  # 左/右键正常退出循环
-                if aborted:
-                    break
+
                 correct = int(chosen == test_interval)
 
                 # ---- Update Quest in cpd_inv space ----
@@ -396,13 +365,15 @@ def main():
 
                 # ---- Logging ----
                 rho_cpd, omega, _ = compute_spatiotemporal_frequency(
-                    renderer.width, renderer.W, dist, sf_cpp_eff, speed_eff)
+                    renderer.width, renderer.W, dist, sf_cpp, speed)
 
                 est_cpd_inv = quest_mean_cpd_inv(quest, cpd_inv_range)
-                est_dist = dist_from_cpd_inv(est_cpd_inv, sf_cpp_eff, screen_width_px, screen_width_m)
+                est_dist    = float(np.clip(
+                    dist_from_cpd_inv(est_cpd_inv, sf_cpp, screen_width_px, screen_width_m),
+                    MIN_DIST, MAX_DIST))
 
                 writer.writerow([
-                    args.name, color, speed, contrast, lum, sf_cpp, sf_cpp_eff, speed_eff,
+                    args.name, color, speed, contrast, lum, sf_cpp,
                     args.diagonal_inch, args.visual_radius_deg,
                     trial_idx,
                     round(dist, 4), round(cpd_inv_test, 5),
@@ -428,7 +399,9 @@ def main():
                 print(f"  Converged after {trial_idx} trials.")
 
             est_cpd_inv = quest_mean_cpd_inv(quest, cpd_inv_range)
-            est_dist = dist_from_cpd_inv(est_cpd_inv, sf_cpp_eff, screen_width_px, screen_width_m)
+            est_dist    = float(np.clip(
+                dist_from_cpd_inv(est_cpd_inv, sf_cpp, screen_width_px, screen_width_m),
+                MIN_DIST, MAX_DIST))
             print(f"\n  Final estimate: cpd_inv={est_cpd_inv:.5f}  "
                   f"dist={est_dist:.4f}m  SD={quest_sd(quest):.5f}")
 

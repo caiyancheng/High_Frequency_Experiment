@@ -195,19 +195,19 @@ def load_completed_conditions(name, csv_path=QUEST_CSV):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--name", default='YanchengCai')
-    # parser.add_argument("--name", default='Rafal Mantiuk')
+    # parser.add_argument("--name", default='YanchengCai')
+    parser.add_argument("--name", default='Rafal Mantiuk')
     parser.add_argument("--colors", nargs="+", default=["ach", "rg", "yv"])
     # 10, 15, 20, 30, 45
-    parser.add_argument("--ach_speeds", nargs="+", type=float, default=[40, 60, 80, 120, 180])
-    parser.add_argument("--rg_speeds", nargs="+", type=float, default=[50, 75, 100, 150])
-    parser.add_argument("--yv_speeds", nargs="+", type=float, default=[400, 600])
-    parser.add_argument("--ach_luminance_list", nargs="+", type=float, default=[50])
-    parser.add_argument("--rg_luminance_list", nargs="+", type=float, default=[50])
-    parser.add_argument("--yv_luminance_list", nargs="+", type=float, default=[50])
-    parser.add_argument("--ach_spatial_frequency_cpp", type=float, default=0.25)
-    parser.add_argument("--rg_spatial_frequency_cpp", type=float, default=0.2)
-    parser.add_argument("--yv_spatial_frequency_cpp", type=float, default=0.05)
+    parser.add_argument("--ach_speeds", nargs="+", type=float, default=[200, 300, 450])
+    parser.add_argument("--rg_speeds", nargs="+", type=float, default=[100, 150, 200])
+    parser.add_argument("--yv_speeds", nargs="+", type=float, default=[400, 500, 600])
+    parser.add_argument("--ach_luminance_list", nargs="+", type=float, default=[1])
+    parser.add_argument("--rg_luminance_list", nargs="+", type=float, default=[1])
+    parser.add_argument("--yv_luminance_list", nargs="+", type=float, default=[1])
+    parser.add_argument("--ach_spatial_frequency_cpp", type=float, default=0.1)
+    parser.add_argument("--rg_spatial_frequency_cpp", type=float, default=0.1)
+    parser.add_argument("--yv_spatial_frequency_cpp", type=float, default=0.02)
 
     parser.add_argument("--ach_contrast", type=float, default=0.9)
     parser.add_argument("--rg_contrast",  type=float, default=0.14)
@@ -257,7 +257,7 @@ def main():
         diagonal_inch=args.diagonal_inch,
         visual_radius_deg=args.visual_radius_deg,
         monitor_index=args.monitor_index,
-        lut_json_path="calibrate_display/Measure_specbos/pixel_luminance_model_pchip_B100_C100_s800.json"
+        lut_json_path="calibrate_display/Measure_specbos/pixel_luminance_model_pchip_B100_C100_s800_dark.json"
     )
     renderer.init_window()
 

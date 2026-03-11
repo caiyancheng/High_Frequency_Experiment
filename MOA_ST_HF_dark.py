@@ -160,9 +160,10 @@ def main():
     # parser.add_argument("--name", default="Rafal Mantiuk")
     parser.add_argument("--colors",      nargs="+",    default=["ach", "rg", "yv"])
     # parser.add_argument("--ach_speeds", nargs="+", type=float, default=[40, 80, 120, 180])
-    parser.add_argument("--ach_speeds", nargs="+", type=float, default=[150, 200, 300])
-    parser.add_argument("--rg_speeds", nargs="+", type=float, default=[100, 150])
-    parser.add_argument("--yv_speeds", nargs="+", type=float, default=[400, 500])
+    # 10, 15, 20, 30, 45
+    parser.add_argument("--ach_speeds", nargs="+", type=float, default=[200, 300, 450])
+    parser.add_argument("--rg_speeds", nargs="+", type=float, default=[100, 150, 200])
+    parser.add_argument("--yv_speeds", nargs="+", type=float, default=[400, 500, 600])
     parser.add_argument("--ach_luminance_list", nargs="+", type=float, default=[1])
     parser.add_argument("--rg_luminance_list", nargs="+", type=float, default=[1])
     parser.add_argument("--yv_luminance_list", nargs="+", type=float, default=[1])
