@@ -195,9 +195,12 @@ def load_completed_conditions(name, csv_path=QUEST_CSV):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--name", default='YanchengCai')
+    parser.add_argument("--name", default='Yaru Liu')
+    # parser.add_argument("--name", default='YanchengCai')
+    # parser.add_argument("--name", default='Shuqi Lou')
     # parser.add_argument("--name", default='Rafal Mantiuk')
     # parser.add_argument("--name", default='YifanDing')
+    # parser.add_argument("--name", default='LinShen')
     parser.add_argument("--colors", nargs="+", default=["ach", "rg", "yv"])
     # 10, 15, 20, 30, 45
     parser.add_argument("--ach_speeds", nargs="+", type=float, default=[40, 60, 80, 120, 180])
@@ -297,21 +300,22 @@ def main():
 
             quest = make_quest(start_cpd_inv, cpd_inv_range)
 
-            half = TRIALS_PER_CONDITION // 2
-            interval_seq = [1]*half + [2]*half
+            half = (TRIALS_PER_CONDITION + 10) // 2
+            interval_seq = [1] * half + [2] * half
             random.shuffle(interval_seq)
             seq_idx = 0
 
-            prev_cpd_inv = None
+            # prev_cpd_inv = None
             last_step    = 0.0
             converged    = False
-            trial_idx    = 0
             dist         = start_dist   # fallback for progress screen
             cpd_inv_test = start_cpd_inv
             sf_cpp_eff = sf_cpp
             speed_eff = speed
             renderer.set_condition(color, lum)
-            for trial_idx in range(TRIALS_PER_CONDITION):
+            max_trials = TRIALS_PER_CONDITION
+            trial_idx = 0
+            while trial_idx < max_trials:
                 if trial_idx % REPEATS_PER_POSITION == 0:
                     # ---- Quest suggestion in cpd_inv space ----
                     cpd_inv_test = quest_suggest_cpd_inv(quest, cpd_inv_range)
@@ -395,6 +399,13 @@ def main():
                 # ---- Update Quest in cpd_inv space ----
                 quest.addResponse(correct, intensity=cpd_inv_test)
 
+                # ---- 收敛检查（只在达到原定trials上限时触发一次扩展）----
+                if trial_idx + 1 == TRIALS_PER_CONDITION and quest_sd(quest) > QUEST_CONVERGE_THRESH:
+                    max_trials = TRIALS_PER_CONDITION + 5
+                    print(f"  [EXTEND] SD={quest_sd(quest):.5f} > thresh, adding 10 trials → max={max_trials}")
+
+                trial_idx += 1  # ← while循环手动递增
+
                 # ---- Logging ----
                 rho_cpd, omega, _ = compute_spatiotemporal_frequency(
                     renderer.width, renderer.W, dist, sf_cpp_eff, speed_eff)
@@ -414,7 +425,7 @@ def main():
                 ])
                 fh.flush()
 
-                print(f"  Trial {trial_idx+1:2d}: "
+                print(f"  Trial {trial_idx:2d}: "
                       f"dist={dist:.3f}m  cpd_inv={cpd_inv_test:.4f}  "
                       f"int={test_interval}  chosen={chosen}  ok={bool(correct)}  "
                       f"est={est_cpd_inv:.4f}({est_dist:.3f}m)  "
