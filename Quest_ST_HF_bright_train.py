@@ -144,7 +144,7 @@ def main():
     parser.add_argument("--diagonal_inch",     type=float, default=27)
     parser.add_argument("--visual_radius_deg", type=float, default=2.0)
     parser.add_argument("--port",          default="/dev/ttyACM0")
-    parser.add_argument("--duration",      type=float, default=1.0)
+    parser.add_argument("--duration",      type=float, default=2.0)
     parser.add_argument("--monitor_index", type=int,   default=1)
     parser.add_argument("--trials",        type=int,   default=TRAINING_TRIALS_PER_CONDITION,
                         help="Trials per condition in training (default: %(default)s)")
@@ -201,7 +201,8 @@ def main():
                 MIN_DIST, MAX_DIST, sf_cpp, screen_width_px, screen_width_m)
 
             # Start from middle of distance range
-            start_dist    = 1.1 #float(np.clip((MIN_DIST + MAX_DIST) / 2, MIN_DIST, MAX_DIST))
+            start_dist    = 1.1
+            #float(np.clip((MIN_DIST + MAX_DIST) / 2, MIN_DIST, MAX_DIST))
             start_cpd_inv = cpd_inv_from_dist(
                 start_dist, sf_cpp, screen_width_px, screen_width_m)
 
