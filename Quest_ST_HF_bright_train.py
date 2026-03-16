@@ -144,7 +144,7 @@ def main():
     parser.add_argument("--diagonal_inch",     type=float, default=27)
     parser.add_argument("--visual_radius_deg", type=float, default=2.0)
     parser.add_argument("--port",          default="/dev/ttyACM0")
-    parser.add_argument("--duration",      type=float, default=2.0)
+    parser.add_argument("--duration",      type=float, default=1.0)
     parser.add_argument("--monitor_index", type=int,   default=1)
     parser.add_argument("--trials",        type=int,   default=TRAINING_TRIALS_PER_CONDITION,
                         help="Trials per condition in training (default: %(default)s)")
