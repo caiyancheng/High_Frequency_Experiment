@@ -195,7 +195,8 @@ def load_completed_conditions(name, csv_path=QUEST_CSV):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--name", default='FumingYang')
+    # parser.add_argument("--name", default='Hongyun Gao')
+    parser.add_argument("--name", default='Dounia Hammou')
     # parser.add_argument("--name", default='Leyi Yao')
     # parser.add_argument("--name", default='Yaru Liu')
     # parser.add_argument("--name", default='Mengqing Huang')
